@@ -6,7 +6,7 @@ _ = require 'underscore'
 proxy = require './lib/tinyproxy'
 
 # stuff
-view = _.template(fs.readFileSync(__dirname + '/public/app.html', 'utf8'))
+view = _.template fs.readFileSync __dirname + '/public/app.html', 'utf8'
 connect_server = connect.createServer()
 connect_server.use connect.cookieParser()
 connect_server.use connect.bodyParser()
@@ -24,19 +24,16 @@ connect_server.use connect.router (app) ->
 
 	# login
 	app.get '/login', (req, res, next) ->
-
 		req.authenticate ['github'], (err, auth) ->
-
                 # is redirecting
                 if auth == undefined
                     return false
-
+                # error connecting
                 else if err
                     res.end 'err: ' + err
-
+                # dunno
                 else if !auth
                     res.end 'what happened here'
-
                 # successful
                 else
                     res.writeHead 303, Location: '/'
@@ -44,18 +41,13 @@ connect_server.use connect.router (app) ->
 
 	# logout
 	app.get '/logout', (req, res, next) ->
-
 		req.logout()
 
 	# main page
 	app.get '/', (req, res, next) ->
-
 		if req.isAuthenticated()
 			res.writeHead 200, 'Content-Type': 'text/html'
-			res.end _.template(fs.readFileSync(__dirname + '/public/app.html', 'utf8'), req.getAuthDetails())
-			# dont cache view for now
-			# res.end view req.getAuthDetails()
-
+			res.end view req.getAuthDetails()
 		else
 			res.writeHead 303, Location: '/login'
 			res.end()

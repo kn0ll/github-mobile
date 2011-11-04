@@ -9,6 +9,13 @@
 	<link rel="stylesheet" media="screen" href="css/lib/jquery.mobile-1.0rc2.css">
 	<link rel="stylesheet" media="screen" href="css/style.css">
 
+</head>
+
+<body>
+	
+	<div id="page" data-role="page">
+	</div>
+
 	<script src="js/lib/jquery-1.6.4.js"></script>
 	<script src="js/lib/jquery.mobile-1.0rc2.js"></script>
 	<script src="js/lib/jquery.easing.1.3.js"></script>
@@ -18,37 +25,15 @@
 	<script src="js/lib/underscore.string-1.1.6.js"></script>
 	<script src="js/lib/backbone-0.5.3.js"></script>
 
-</head>
-
-<body>
-	
-	<div id="page" data-role="page">
-	</div>
-
 	<script>
-
 		var GH = (function(gh) {
 			gh.User = new Backbone.Model(<%= JSON.stringify(user) %>);
 			return gh;
 		})(window['GH'] || {});
-
-		var username = GH.User.get('login');
-
-		var EventsCollection = Backbone.Collection.extend({
-			url: _.sprintf('/v3/users/%s/received_events/public', username)
-		});
-
-		var events = new EventsCollection();
-		events.fetch({
-			success: function(events) {
-				console.log(_.sprintf('init %s', username), events);
-			}
-		});
-
 	</script>
 
 	<script src="js/brain.js"></script>
-	
+
 </body>
 
 </html>
