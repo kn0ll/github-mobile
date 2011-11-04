@@ -2,35 +2,32 @@
 
 	var username = GH.User.get('login');
 
-	var EventsCollection = Backbone.Collection.extend({
+	// collections
+
+	var News = Backbone.Collection.extend({
 		url: _.sprintf('/v3/users/%s/received_events/public', username)
 	});
 
-	var events = new EventsCollection();
-	events.fetch({
-		success: function(events) {
-			console.log(_.sprintf('init %s', username), events);
-		}
+	var Events = Backbone.Collection.extend({
+		url: _.sprintf('/v3/users/%s/events', username)
 	});
+
+	var Repos = Backbone.Collection.extend({
+		url: _.sprintf('/v3/users/%s/repos', username)
+	});
+
+	var Watched = Backbone.Collection.extend({
+		url: _.sprintf('/v3/users/%s/watched', username)
+	});
+
+	// initiate collections
+
+	(new News()).fetch({ success: function(news) {
+		console.log(_.sprintf('%s\'s news', username), news);
+	}});
+
+	(new Repos()).fetch({ success: function(repos) {
+		console.log(_.sprintf('%s\'s repos', username), repos);
+	}});
 	
 })();
-
-/*
-
-$.get('/v3/users/catshirt/received_events/public', function(events) {
-	console.log('events for you', events);
-});
-
-$.get('/v3/users/catshirt/events', function(events) {
-	console.log('your events', events);
-});
-
-$.get('/v3/users/catshirt/repos', function(repos) {
-	console.log('your repos', repos);
-});
-
-$.get('/v3/users/catshirt/watched', function(repos) {
-	console.log('your watched repos', repos);
-});
-
-*/
