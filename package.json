@@ -1,0 +1,9 @@
+{
+    "name": "github-mobile",
+    "version": "0.0.1",
+    "dependencies": {
+        "connect": "1.7.x",
+        "connect-auth": "0.4.x",
+        "underscore": "1.2.x"
+    }
+}
