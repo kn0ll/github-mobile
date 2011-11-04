@@ -4,6 +4,8 @@
 <head>
 
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
 	<title>ghm</title>
 
 	<link rel="stylesheet" media="screen" href="css/lib/jquery.mobile-1.0rc2.css">
@@ -12,18 +14,26 @@
 </head>
 
 <body>
-	
-	<div id="news" data-role="page">
-		news
-	</div>
 
-	<div id="repos" data-role="page">
-		repos
-	</div>
-
-	<div id="footer" data-role="footer">
+	<div id="header" data-role="header">
 		<a href="#news">News Feed</a>
 		<a href="#repos">Repositories</a>
+	</div>
+
+	<div id="viewport">
+
+		<div id="news" data-role="page">
+			<div data-role="content">
+				news
+			</div>
+		</div>
+
+		<div id="repos" data-role="page">
+			<div data-role="content">
+				repos
+			</div>
+		</div>
+
 	</div>
 
 	<script src="js/lib/jquery-1.6.4.js"></script>

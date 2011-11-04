@@ -1,10 +1,9 @@
 body {
+	margin: 0;
 	background: #f0f0f0;
 }
 
-#footer {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
+#viewport {
+	position: relative;
+	overflow: visible;
 }
