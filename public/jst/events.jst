@@ -1,0 +1,25 @@
+<ul>
+
+<%
+collection.each(function(model) {
+	var type = model.get('type');
+
+	if (type == 'IssuesEvent') {
+%>
+
+<li>
+	yay issues
+</li>
+
+<% } else { %>
+
+<li>
+	<%= type %>
+</li>
+
+<%
+	}
+});
+%>
+
+</ul>
