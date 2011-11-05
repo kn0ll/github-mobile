@@ -1,7 +1,7 @@
 $ ->
 
 	new GH.Views.Nav
-		el: $('#nav')
+		el: $ '#nav'
 	
 	new GH.Views.News
-		el: $('#news .content')
+		el: $ '#news .content'

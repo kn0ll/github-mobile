@@ -11,7 +11,7 @@ GH = ((gh) ->
 				self = this
 				_.bindAll this
 				this.model = new Backbone.Model
-					$selected: $('.selected', self.el)
+					$selected: $ '.selected', self.el
 				this.model.bind 'change:$selected', this.render
 
 			select: (e) ->
@@ -33,7 +33,7 @@ GH = ((gh) ->
 			render: ->
 				self = this;
 				$.get '/jst/events.jst', (tmp) ->
-					self.el.empty().append _.template(tmp, self)
+					self.el.empty().append _.template tmp, self
 					self.el.trigger 'modified'
 
 	gh.Views = new Views

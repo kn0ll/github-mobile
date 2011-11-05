@@ -10,8 +10,7 @@ GH = ((gh) ->
 
 		# create each iscroll
 		$(s).each ->
-			$(this).data
-				scrollview: new iScroll this
+			$(this).data scrollview: new iScroll this
 			
 		# prevent scrolling the actual doc
 		$doc.bind 'touchmove', (e) ->
