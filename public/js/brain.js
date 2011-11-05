@@ -55,6 +55,8 @@ $(function() {
 
 	// scrollview
 
+	return false;
+
 	(function() {
 
 		var $win = $(window),

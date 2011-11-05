@@ -16,9 +16,6 @@ connect_server.use connect.static __dirname + '/public'
 # github auth
 connect_server.use auth strategies: [auth.Github require './keys']
 
-# ajax proxy
-connect_server.use proxy '^/v3(/.+)', 'api.github.com'
-
 # serve app
 connect_server.use connect.router (app) ->
 
