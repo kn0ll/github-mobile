@@ -19,7 +19,7 @@ a {
 }
 
 #header {
-	height: 34px;
+	height: 38px;
 	font-size: 12px;
 	font-weight: bold;
 	background-color: rgb(221, 221, 221);
@@ -28,8 +28,8 @@ a {
 }
 
 	#header a {
-		height: 32px;
-		line-height: 32px;
+		height: 36px;
+		line-height: 36px;
 		display: block;
 		float: left;
 		border-bottom: 2px solid rgb(209, 209, 209);
