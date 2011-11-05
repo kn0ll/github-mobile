@@ -3,7 +3,6 @@ fs = require 'fs'
 connect = require 'connect'
 auth = require 'connect-auth'
 _ = require 'underscore'
-proxy = require './lib/tinyproxy'
 
 # stuff
 view = _.template fs.readFileSync __dirname + '/public/app.html', 'utf8'
