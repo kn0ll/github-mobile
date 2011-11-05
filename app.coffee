@@ -21,19 +21,19 @@ connect_server.use connect.router (app) ->
 	# login
 	app.get '/login', (req, res, next) ->
 		req.authenticate ['github'], (err, auth) ->
-                # is redirecting
-                if auth == undefined
-                    return false
-                # error connecting
-                else if err
-                    res.end 'err: ' + err
-                # dunno
-                else if !auth
-                    res.end 'what happened here'
-                # successful
-                else
-                    res.writeHead 303, Location: '/'
-                    res.end()
+			# is redirecting
+			if auth == undefined
+			    return false
+			# error connecting
+			else if err
+			    res.end 'err: ' + err
+			# dunno
+			else if !auth
+			    res.end 'what happened here'
+			# successful
+			else
+			    res.writeHead 303, Location: '/'
+			    res.end()
 
 	# logout
 	app.get '/logout', (req, res, next) ->
