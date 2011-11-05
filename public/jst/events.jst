@@ -1,25 +1,25 @@
 <ul>
-
-<%
-collection.each(function(model) {
+<% collection.each(function(model) {
 	var type = model.get('type');
 
-	if (type == 'IssuesEvent') {
-%>
-
+if (type == 'IssuesEvent') {
+	var p = model.get('payload'),
+		r = model.get('repo'),
+		username = p.issue.user.login,
+		action = p.action,
+		number = p.issue.number,
+		name = r.name,
+		date = new Date(p.issue.created_at).toRelativeTime();
+	console.log(model);
+	%>
 <li>
-	yay issues
+	<a href="#"><%= username %></a> <%= action %> <a href="#">issue <%= number %></a> on <a href="#"><%= name %></a> about <%= date %>
 </li>
 
 <% } else { %>
-
 <li>
 	<%= type %>
 </li>
 
-<%
-	}
-});
-%>
-
+<% } }); %>
 </ul>

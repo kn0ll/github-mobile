@@ -66,17 +66,12 @@ $(function() {
 		}
 
 		$views.each(function() {
-			
 			var $view = $(this);
-
 			$view.scrollview({ direction: 'y' });
-
 			resize_scrollview($view);
-
 			$win.bind('orientationchange', function() {
 				resize_scrollview($view);	
 			});
-
 		});
 
 	})();
