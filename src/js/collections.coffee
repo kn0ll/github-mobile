@@ -1,4 +1,4 @@
-GH = ((gh, username) ->
+GH = ((gh) ->
 
 	username = gh.User.get 'login'
 
