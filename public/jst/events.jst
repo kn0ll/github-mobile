@@ -3,7 +3,6 @@
 	var type = model.get('type');
 
 if (type == 'IssuesEvent') {
-console.log(model);
 	var p = model.get('payload'),
 		created = model.get('created_at'),
 		username = p.issue.user.login,
@@ -42,7 +41,6 @@ console.log(model);
 </li>
 
 <% } else if (type == 'DeleteEvent') {
-	console.log(model);
 	var p = model.get('payload'),
 		a = model.get('actor'),
 		created = model.get('created_at'),
