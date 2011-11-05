@@ -110,8 +110,53 @@ if (type == 'IssuesEvent') {
 	<span class="title"><a href="#"><%= username %></a> <span>created</span> <%= ref_type %> <a href="#"><%= ref %></a> at <a href="#"><%= name %></a> <%= date %></span>
 	<div class="details clearfix">
 		<div class="gravatar"><img src="https://secure.gravatar.com/avatar/<%= gravatar_id %>" /></div>
-		<span class="message">New <%= ref_type %> is at <a href="#">/<%= name %>/tree/<%= ref %></a></span><br />
-		<a href="#">Compare <%= ref %> <%= ref_type %> with master &raquo;</a>
+		<span class="message">
+			New <%= ref_type %> is at <a href="#">/<%= name %>/tree/<%= ref %></a><br />
+			<a href="#">Compare <%= ref %> <%= ref_type %> with master &raquo;</a>
+		</span>
+	</div>
+</li>
+
+<% /*
+:::::::::  :::    :::  ::::::::  :::    ::: 
+:+:    :+: :+:    :+: :+:    :+: :+:    :+: 
++:+    +:+ +:+    +:+ +:+        +:+    +:+ 
++#++:++#+  +#+    +:+ +#++:++#++ +#++:++#++ 
++#+        +#+    +#+        +#+ +#+    +#+ 
+#+#        #+#    #+# #+#    #+# #+#    #+# 
+###         ########   ########  ###    ### 
+*/
+} else if (type == 'PushEvent') {
+	var p = model.get('payload'),
+		a = model.get('actor'),
+		created = model.get('created_at'),
+		username = a.login,
+		ref_suffix = p.ref.split('/')[2],
+		name = model.get('repo').name,
+		date = new FormattedDate(created).toRelativeTime(),
+		gravatar_id = a.gravatar_id,
+		commits = p.commits,
+		more_commits = commits.length > 3? commits.length - 3: 0;
+	%>
+<li>
+	<span class="title"><a href="#"><%= username %></a> <span>pushed to</span> <%= ref_suffix %> at <a href="#"><%= name %></a> <%= date %></span>
+	<div class="details clearfix">
+		<div class="gravatar"><img src="https://secure.gravatar.com/avatar/<%= gravatar_id %>" /></div>
+		<span class="message">
+			<ul class="commits">
+				<% _.each(commits.reverse(), function(commit, i) {
+					if (i > 2) { return false; }
+					var sha = commit.sha.substring(0, 7),
+						message = commit.message;
+				%>
+					<li><a href="#"><%= sha %></a> <%= message %></li>
+				<% }); %>
+			</ul>
+			<% if (more_commits) { %>
+				<a href="#"><%= more_commits %> more commits &raquo;</a>
+			<% } %>
+		</span>
+		
 	</div>
 </li>
 

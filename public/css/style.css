@@ -3,18 +3,12 @@ body {
   font: 13.34px helvetica, arial, freesans, clean, sans-serif;
   line-height: 1.4;
 }
-a {
+body a {
   color: #4183c4;
   text-decoration: none;
 }
-.scrollview {
-  position: absolute;
-  z-index: 1;
-  top: 39px;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  overflow: auto;
+body a:hover {
+  text-decoration: underline;
 }
 #nav {
   height: 38px;
@@ -47,6 +41,9 @@ a {
   background-image: -webkit-gradient(linear, left top, left bottom, from(#f8fafd), to(#d9e0e9));
   border-bottom-color: #cad4e1;
 }
+#nav a:hover {
+  text-decoration: none;
+}
 #nav a.selected {
   border-bottom-color: #b45a1f;
   color: #000;
@@ -68,6 +65,10 @@ ul.stream > li .title {
 ul.stream > li .title > span {
   background: #fff6a9;
 }
+ul.stream > li .message {
+  padding-left: 45px;
+  display: block;
+}
 ul.stream > li .gravatar {
   border: 1px solid #d0d0d0;
   padding: 2px;
@@ -79,6 +80,20 @@ ul.stream > li .gravatar {
 ul.stream > li .gravatar img {
   height: 30px;
   width: 30px;
+}
+ul.stream > li .commits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.scrollview {
+  position: absolute;
+  z-index: 1;
+  top: 39px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: auto;
 }
 .clearfix:before, .clearfix:after {
   content: "\0020";
