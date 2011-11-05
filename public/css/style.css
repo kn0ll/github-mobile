@@ -65,10 +65,6 @@ ul.stream > li .title {
 ul.stream > li .title > span {
   background: #fff6a9;
 }
-ul.stream > li .message {
-  padding-left: 45px;
-  display: block;
-}
 ul.stream > li .gravatar {
   border: 1px solid #d0d0d0;
   padding: 2px;
@@ -81,7 +77,11 @@ ul.stream > li .gravatar img {
   height: 30px;
   width: 30px;
 }
-ul.stream > li .commits {
+ul.stream > li .message {
+  padding-left: 45px;
+  display: block;
+}
+ul.stream > li .message ul {
   list-style: none;
   margin: 0;
   padding: 0;
