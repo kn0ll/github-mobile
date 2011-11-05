@@ -18,7 +18,7 @@
       }
       _Class.prototype.sync = function(method, model, options) {
         options.dataType = 'jsonp';
-        options.url = _.sprintf('https://api.github.com%s', this.url);
+        options.url = "https://api.github.com" + this.url;
         return Backbone.sync(method, model, options);
       };
       _Class.prototype.parse = function(res) {
@@ -33,7 +33,7 @@
         function _Class() {
           _Class.__super__.constructor.apply(this, arguments);
         }
-        _Class.prototype.url = _.sprintf('/users/%s/received_events/public', username);
+        _Class.prototype.url = "/users/" + username + "/received_events/public";
         return _Class;
       })();
       _Class.prototype.Events = (function() {
@@ -41,7 +41,7 @@
         function _Class() {
           _Class.__super__.constructor.apply(this, arguments);
         }
-        _Class.prototype.url = _.sprintf('/users/%s/events', username);
+        _Class.prototype.url = "/users/" + username + "/events";
         return _Class;
       })();
       _Class.prototype.Repos = (function() {
@@ -49,7 +49,7 @@
         function _Class() {
           _Class.__super__.constructor.apply(this, arguments);
         }
-        _Class.prototype.url = _.sprintf('/users/%s/repos', username);
+        _Class.prototype.url = "/users/" + username + "/repos";
         return _Class;
       })();
       _Class.prototype.Watched = (function() {
@@ -57,7 +57,7 @@
         function _Class() {
           _Class.__super__.constructor.apply(this, arguments);
         }
-        _Class.prototype.url = _.sprintf('/users/%s/watched', username);
+        _Class.prototype.url = "/users/" + username + "/watched";
         return _Class;
       })();
       return _Class;

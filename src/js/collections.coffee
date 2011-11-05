@@ -6,7 +6,7 @@ GH = ((gh, username) ->
 
 		sync: (method, model, options) ->
 			options.dataType = 'jsonp'
-			options.url = _.sprintf 'https://api.github.com%s', this.url
+			options.url = "https://api.github.com#{this.url}"
 			Backbone.sync method, model, options
 
 		parse: (res) -> res.data
@@ -14,16 +14,16 @@ GH = ((gh, username) ->
 	Collections = class
 
 		News: class extends Base
-			url: _.sprintf('/users/%s/received_events/public', username)
+			url: "/users/#{username}/received_events/public"
 			
 		Events: class extends Base
-			url: _.sprintf('/users/%s/events', username)
+			url: "/users/#{username}/events"
 
 		Repos: class extends Base
-			url: _.sprintf('/users/%s/repos', username)
+			url: "/users/#{username}/repos"
 
 		Watched: class extends Base
-			url: _.sprintf('/users/%s/watched', username)
+			url: "/users/#{username}/watched"
 
 	gh.Collections = new Collections
 	gh
