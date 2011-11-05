@@ -9,12 +9,12 @@ if (type == 'IssuesEvent') {
 		action = p.action,
 		number = p.issue.number,
 		name = model.get('repo').name,
-		date = new Date(created).toRelativeTime(),
+		date = new FormattedDate(created).toRelativeTime(),
 		gravatar_id = model.get('actor').gravatar_id,
 		details = p.issue.title;
 	%>
 <li>
-	<span class="title"><a href="#"><%= username %></a> <span><%= action %></span> <a href="#">issue <%= number %></a> on <a href="#"><%= name %></a> about <%= date %></span>
+	<span class="title"><a href="#"><%= username %></a> <span><%= action %></span> <a href="#">issue <%= number %></a> on <a href="#"><%= name %></a> <%= date %></span>
 	<div class="details clearfix">
 		<div class="gravatar"><img src="https://secure.gravatar.com/avatar/<%= gravatar_id %>" /></div>
 		<span class="message"><%= details %></span>
@@ -28,12 +28,12 @@ if (type == 'IssuesEvent') {
 		type_type = p.issue.pull_request.diff_url? 'pull request': 'issue',
 		number = p.issue.number,
 		name = model.get('repo').name,
-		date = new Date(created).toRelativeTime(),
+		date = new FormattedDate(created).toRelativeTime(),
 		gravatar_id = model.get('actor').gravatar_id,
 		details = p.comment.body;
 	%>
 <li>
-	<span class="title"><a href="#"><%= username %></a> <span>commented</span> on <a href="#"><%= type_type %> <%= number %></a> on <a href="#"><%= name %></a> about <%= date %></span>
+	<span class="title"><a href="#"><%= username %></a> <span>commented</span> on <a href="#"><%= type_type %> <%= number %></a> on <a href="#"><%= name %></a> <%= date %></span>
 	<div class="details clearfix">
 		<div class="gravatar"><img src="https://secure.gravatar.com/avatar/<%= gravatar_id %>" /></div>
 		<span class="message"><%= details %></span>
@@ -48,14 +48,34 @@ if (type == 'IssuesEvent') {
 		ref_type = p.ref_type,
 		ref = p.ref,
 		name = model.get('repo').name,
-		date = new Date(created).toRelativeTime(),
+		date = new FormattedDate(created).toRelativeTime(),
 		gravatar_id = a.gravatar_id;
 	%>
 <li>
-	<span class="title"><a href="#"><%= username %></a> <span>deleted</span> <%= ref_type %> <%= ref %> at <a href="#"><%= name %></a> on <a href="#"><%= name %></a> about <%= date %></span>
+	<span class="title"><a href="#"><%= username %></a> <span>deleted</span> <%= ref_type %> <%= ref %> at <a href="#"><%= name %></a> <%= date %></span>
 	<div class="details clearfix">
 		<div class="gravatar"><img src="https://secure.gravatar.com/avatar/<%= gravatar_id %>" /></div>
 		<span class="message">Deleted <%= ref_type %> was at <em>/<%= name %>/tree/<%= ref %></em></span>
+	</div>
+</li>
+
+<% } else if (type == 'CreateEvent') {
+	var p = model.get('payload'),
+		a = model.get('actor'),
+		created = model.get('created_at'),
+		username = a.login,
+		ref_type = p.ref_type,
+		ref = p.ref,
+		name = model.get('repo').name,
+		date = new FormattedDate(created).toRelativeTime(),
+		gravatar_id = a.gravatar_id;
+	%>
+<li>
+	<span class="title"><a href="#"><%= username %></a> <span>created</span> <%= ref_type %> <a href="#"><%= ref %></a> at <a href="#"><%= name %></a> <%= date %></span>
+	<div class="details clearfix">
+		<div class="gravatar"><img src="https://secure.gravatar.com/avatar/<%= gravatar_id %>" /></div>
+		<span class="message">New <%= ref_type %> is at <a href="#">/<%= name %>/tree/<%= ref %></a></span><br />
+		<a href="#">Compare <%= ref %> <%= ref_type %> with master &raquo;</a>
 	</div>
 </li>
 

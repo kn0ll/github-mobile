@@ -1,4 +1,15 @@
 /**
+ * some platforms cannot handle timestamps of a certain format
+ * ie. iOS cannot understand the Z in '2011-11-05T06:38:57Z'
+ * this FormattedDate can be used the same as Date, but normalizes the timestamp
+ */
+function FormattedDate(timestamp) {
+  var parts = timestamp.split(/[-:TZ]/),
+    offset = new Date().getTimezoneOffset() / 60;
+  return new Date(parts[0], parts[1] - 1, parts[2], parts[3] - offset, parts[4], parts[5])
+}
+
+/**
  * Returns a description of this past date in relative terms.
  * Takes an optional parameter (default: 0) setting the threshold in ms which
  * is considered "Just now".
@@ -33,6 +44,7 @@ Date.prototype.toRelativeTime = function(now_threshold) {
     return 'Just now';
   }
 
+  var prefix = '';
   var units = null;
   var conversions = {
     millisecond: 1, // ms    -> ms
@@ -45,6 +57,9 @@ Date.prototype.toRelativeTime = function(now_threshold) {
   };
 
   for (var key in conversions) {
+    if (key == 'day') {
+      prefix = 'about';
+    }
     if (delta < conversions[key]) {
       break;
     } else {
@@ -56,7 +71,7 @@ Date.prototype.toRelativeTime = function(now_threshold) {
   // pluralize a unit when the difference is greater than 1.
   delta = Math.floor(delta);
   if (delta !== 1) { units += "s"; }
-  return [delta, units, "ago"].join(" ");
+  return [prefix, delta, units, "ago"].join(" ");
 };
 
 /*

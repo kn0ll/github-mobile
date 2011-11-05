@@ -8,8 +8,8 @@
     child.__super__ = parent.prototype;
     return child;
   };
-  GH = (function(gh, username) {
-    var Base, Collections;
+  GH = (function(gh) {
+    var Base, Collections, username;
     username = gh.User.get('login');
     Base = (function() {
       __extends(_Class, Backbone.Collection);
