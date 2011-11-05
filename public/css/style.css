@@ -9,16 +9,17 @@ a {
 	text-decoration: none;
 }
 
-#viewport {
-	position: relative;
-	overflow: visible;
+.scrollview {
+	position: absolute;
+	z-index: 1;
+	top: 39px;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	overflow: auto;
 }
 
-.ui-content {
-	padding: 0;
-}
-
-#header {
+#nav {
 	height: 38px;
 	font-size: 12px;
 	font-weight: bold;
@@ -27,7 +28,7 @@ a {
 	border-bottom: 1px solid #cacaca;
 }
 
-	#header a {
+	#nav a {
 		height: 36px;
 		line-height: 36px;
 		display: block;
@@ -42,18 +43,18 @@ a {
 		text-shadow: 0 1px 0 rgba(255, 255, 255, 1.0);
 	}
 
-	#header a:first-child {
+	#nav a:first-child {
 		border-left: 0;
 	}
 
-	#header a:active {
+	#nav a:active {
 		color: rgb(78, 112, 174);
 		background-color: rgb(217, 224, 233);
 		background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(248, 250, 253)), to(rgb(217, 224, 233)));
 		border-bottom-color: rgb(202, 212, 225);
 	}
 
-	#header a.ui-btn-selected {
+	#nav a.selected {
 		border-bottom-color: rgb(180, 90, 31);
 		color: #000;
 	}
