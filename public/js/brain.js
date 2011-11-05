@@ -55,9 +55,11 @@ $(function() {
 
 	// scrollview
 
-	return false;
+	(function(enabled) {
 
-	(function() {
+		if (!enabled) {
+			return false;
+		}
 
 		var $win = $(window),
 			$header = $(':jqmData(role="header")'),
@@ -76,6 +78,6 @@ $(function() {
 			});
 		});
 
-	})();
+	})($.support.touch);
 	
 });
