@@ -11,11 +11,15 @@ console.log(model);
 		number = p.issue.number,
 		name = model.get('repo').name,
 		date = new Date(created).toRelativeTime(),
-		title = p.issue.title;
+		gravatar_id = model.get('actor').gravatar_id,
+		details = p.issue.title;
 	%>
 <li>
 	<span class="title"><a href="#"><%= username %></a> <%= action %> <a href="#">issue <%= number %></a> on <a href="#"><%= name %></a> about <%= date %></span>
-	<span class="details"><%= title %></span>
+	<div class="details">
+		<div class="gravatar"><img src="https://secure.gravatar.com/avatar/<%= gravatar_id %>" /></div>
+		<span class="message"><%= details %></span>
+	</div>
 </li>
 
 <% } else if (type == 'IssueCommentEvent') {
@@ -26,26 +30,35 @@ console.log(model);
 		number = p.issue.number,
 		name = model.get('repo').name,
 		date = new Date(created).toRelativeTime(),
+		gravatar_id = model.get('actor').gravatar_id,
 		details = p.comment.body;
 	%>
 <li>
 	<span class="title"><a href="#"><%= username %></a> commented on <a href="#"><%= type_type %> <%= number %></a> on <a href="#"><%= name %></a> about <%= date %></span>
-	<span class="details"><%= details %></span>
+	<div class="details">
+		<div class="gravatar"><img src="https://secure.gravatar.com/avatar/<%= gravatar_id %>" /></div>
+		<span class="message"><%= details %></span>
+	</div>
 </li>
 
 <% } else if (type == 'DeleteEvent') {
 	console.log(model);
 	var p = model.get('payload'),
+		a = model.get('actor'),
 		created = model.get('created_at'),
-		username = model.get('actor').login,
+		username = a.login,
 		ref_type = p.ref_type,
 		ref = p.ref,
 		name = model.get('repo').name,
-		date = new Date(created).toRelativeTime();
+		date = new Date(created).toRelativeTime(),
+		gravatar_id = a.gravatar_id;
 	%>
 <li>
 	<span class="title"><a href="#"><%= username %></a> deleted <%= ref_type %> <%= ref %> at <a href="#"><%= name %></a> on <a href="#"><%= name %></a> about <%= date %></span>
-	<span class="details">Deleted <%= ref_type %> was at <em>/<%= name %>/tree/<%= ref %></em></span>
+	<div class="details">
+		<div class="gravatar"><img src="https://secure.gravatar.com/avatar/<%= gravatar_id %>" /></div>
+		<span class="message">Deleted <%= ref_type %> was at <em>/<%= name %>/tree/<%= ref %></em></span>
+	</div>
 </li>
 
 <% } else { %>
