@@ -10,6 +10,10 @@ connect_server = connect.createServer()
 connect_server.use connect.cookieParser()
 connect_server.use connect.bodyParser()
 connect_server.use connect.session secret: 'lol'
+
+# asset compilation
+compile_opts = enable: ['coffeescript', 'less'], src: './src', dest: './public'
+connect_server.use connect.compiler compile_opts
 connect_server.use connect.static __dirname + '/public'
 
 # github auth
