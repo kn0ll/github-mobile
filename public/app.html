@@ -18,19 +18,15 @@
 <body>
 
 	<div id="nav" class="clearfix">
-		<a href="#news">News Feed</a>
-		<a href="#repos">Repositories</a>
+		<h1>Github Mobile</h1>
+		<a href="#news"><span>News Feed</span></a>
+		<a href="#profile"><span><%= user.login %></span></a>
 	</div>
 
 	<div id="content">
 		<div id="news" class="scrollview">
 			<div class="content">news</div>
 		</div>
-		<!--
-		<div id="repos" style="display: none;">
-			<div class="content">repos</div>
-		</div>
-		-->
 	</div>
 
 	<script src="/js/lib/jquery-1.6.4.js"></script>

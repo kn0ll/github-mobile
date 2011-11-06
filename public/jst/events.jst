@@ -5,6 +5,7 @@
 		a = model.get('actor'),
 		created = model.get('created_at'),
 		username = a.login,
+		name = model.get('repo').name,
 		date = new FormattedDate(created).toRelativeTime(),
 		gravatar_id = a.gravatar_id;
 
@@ -20,7 +21,6 @@
 if (type == 'IssuesEvent') {
 	var action = p.action,
 		number = p.issue.number,
-		name = model.get('repo').name,
 		details = p.issue.title;
 %>
 <li>
@@ -43,7 +43,6 @@ if (type == 'IssuesEvent') {
 } else if (type == 'IssueCommentEvent') {
 	var type_type = p.issue.pull_request.diff_url? 'pull request': 'issue',
 		number = p.issue.number,
-		name = model.get('repo').name,
 		details = p.comment.body;
 %>
 <li>
@@ -65,8 +64,7 @@ if (type == 'IssuesEvent') {
 */
 } else if (type == 'DeleteEvent') {
 	var ref_type = p.ref_type,
-		ref = p.ref,
-		name = model.get('repo').name;
+		ref = p.ref;
 %>
 <li>
 	<span class="title"><a href="#"><%= username %></a> <span>deleted</span> <%= ref_type %> <%= ref %> at <a href="#"><%= name %></a> <%= date %></span>
@@ -87,8 +85,7 @@ if (type == 'IssuesEvent') {
 */
 } else if (type == 'CreateEvent') {
 	var ref_type = p.ref_type,
-		ref = p.ref,
-		name = model.get('repo').name;
+		ref = p.ref;
 %>
 <li>
 	<span class="title"><a href="#"><%= username %></a> <span>created</span> <%= ref_type %> <a href="#"><%= ref %></a> at <a href="#"><%= name %></a> <%= date %></span>
@@ -112,7 +109,6 @@ if (type == 'IssuesEvent') {
 */
 } else if (type == 'PushEvent') {
 	var ref_suffix = p.ref.split('/')[2],
-		name = model.get('repo').name,
 		commits = p.commits,
 		more_commits = p.size > 3? p.size - 3: 0;
 %>
