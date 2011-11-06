@@ -1,0 +1,38 @@
+ul.events {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ul.events > li {
+  border-bottom: 1px solid #ccc;
+  padding: 9px 13px;
+}
+ul.events > li .title {
+  display: block;
+  font-weight: bold;
+  padding: 0 0 .25em 0;
+}
+ul.events > li .title > span {
+  background: #fff6a9;
+}
+ul.events > li .gravatar {
+  border: 1px solid #d0d0d0;
+  padding: 2px;
+  background: #fff;
+  float: left;
+  line-height: 0;
+  margin-right: .7em;
+}
+ul.events > li .gravatar img {
+  height: 30px;
+  width: 30px;
+}
+ul.events > li .message {
+  padding-left: 45px;
+  display: block;
+}
+ul.events > li .message ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
