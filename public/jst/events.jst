@@ -1,6 +1,12 @@
 <ul class="events">
 <% collection.each(function(model) {
-	var type = model.get('type');
+	var type = model.get('type'),
+		p = model.get('payload'),
+		a = model.get('actor'),
+		username = a.login,
+		created = model.get('created_at'),
+		date = new FormattedDate(created).toRelativeTime(),
+		gravatar_id = a.gravatar_id;
 
 /*
 ::::::::::: ::::::::   ::::::::  :::    ::: :::::::::: ::::::::  
@@ -12,16 +18,11 @@
 ########### ########   ########   ########  ########## ########  
 */
 if (type == 'IssuesEvent') {
-	var p = model.get('payload'),
-		created = model.get('created_at'),
-		username = p.issue.user.login,
-		action = p.action,
+	var action = p.action,
 		number = p.issue.number,
 		name = model.get('repo').name,
-		date = new FormattedDate(created).toRelativeTime(),
-		gravatar_id = model.get('actor').gravatar_id,
 		details = p.issue.title;
-	%>
+%>
 <li>
 	<span class="title"><a href="#"><%= username %></a> <span><%= action %></span> <a href="#">issue <%= number %></a> on <a href="#"><%= name %></a> <%= date %></span>
 	<div class="details clearfix">
@@ -40,16 +41,11 @@ if (type == 'IssuesEvent') {
  ########   ########  ###       ### ###       ### ########## ###    ####     ###    
 */
 } else if (type == 'IssueCommentEvent') {
-	var p = model.get('payload'),
-		created = model.get('created_at'),
-		username = p.issue.user.login,
-		type_type = p.issue.pull_request.diff_url? 'pull request': 'issue',
+	var type_type = p.issue.pull_request.diff_url? 'pull request': 'issue',
 		number = p.issue.number,
 		name = model.get('repo').name,
-		date = new FormattedDate(created).toRelativeTime(),
-		gravatar_id = model.get('actor').gravatar_id,
 		details = p.comment.body;
-	%>
+%>
 <li>
 	<span class="title"><a href="#"><%= username %></a> <span>commented</span> on <a href="#"><%= type_type %> <%= number %></a> on <a href="#"><%= name %></a> <%= date %></span>
 	<div class="details clearfix">
@@ -68,16 +64,10 @@ if (type == 'IssuesEvent') {
 #########  ########## ########## ##########     ###     ########## 
 */
 } else if (type == 'DeleteEvent') {
-	var p = model.get('payload'),
-		a = model.get('actor'),
-		created = model.get('created_at'),
-		username = a.login,
-		ref_type = p.ref_type,
+	var ref_type = p.ref_type,
 		ref = p.ref,
-		name = model.get('repo').name,
-		date = new FormattedDate(created).toRelativeTime(),
-		gravatar_id = a.gravatar_id;
-	%>
+		name = model.get('repo').name;
+%>
 <li>
 	<span class="title"><a href="#"><%= username %></a> <span>deleted</span> <%= ref_type %> <%= ref %> at <a href="#"><%= name %></a> <%= date %></span>
 	<div class="details clearfix">
@@ -96,16 +86,10 @@ if (type == 'IssuesEvent') {
  ########  ###    ### ########## ###     ### ###     ########## 
 */
 } else if (type == 'CreateEvent') {
-	var p = model.get('payload'),
-		a = model.get('actor'),
-		created = model.get('created_at'),
-		username = a.login,
-		ref_type = p.ref_type,
+	var ref_type = p.ref_type,
 		ref = p.ref,
-		name = model.get('repo').name,
-		date = new FormattedDate(created).toRelativeTime(),
-		gravatar_id = a.gravatar_id;
-	%>
+		name = model.get('repo').name;
+%>
 <li>
 	<span class="title"><a href="#"><%= username %></a> <span>created</span> <%= ref_type %> <a href="#"><%= ref %></a> at <a href="#"><%= name %></a> <%= date %></span>
 	<div class="details clearfix">
@@ -127,17 +111,11 @@ if (type == 'IssuesEvent') {
 ###         ########   ########  ###    ### 
 */
 } else if (type == 'PushEvent') {
-	var p = model.get('payload'),
-		a = model.get('actor'),
-		created = model.get('created_at'),
-		username = a.login,
-		ref_suffix = p.ref.split('/')[2],
+	var ref_suffix = p.ref.split('/')[2],
 		name = model.get('repo').name,
-		date = new FormattedDate(created).toRelativeTime(),
-		gravatar_id = a.gravatar_id,
 		commits = p.commits,
 		more_commits = commits.length > 3? commits.length - 3: 0;
-	%>
+%>
 <li>
 	<span class="title"><a href="#"><%= username %></a> <span>pushed to</span> <%= ref_suffix %> at <a href="#"><%= name %></a> <%= date %></span>
 	<div class="details clearfix">
