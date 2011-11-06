@@ -3,8 +3,8 @@
 	var type = model.get('type'),
 		p = model.get('payload'),
 		a = model.get('actor'),
-		username = a.login,
 		created = model.get('created_at'),
+		username = a.login,
 		date = new FormattedDate(created).toRelativeTime(),
 		gravatar_id = a.gravatar_id;
 
@@ -114,7 +114,7 @@ if (type == 'IssuesEvent') {
 	var ref_suffix = p.ref.split('/')[2],
 		name = model.get('repo').name,
 		commits = p.commits,
-		more_commits = commits.length > 3? commits.length - 3: 0;
+		more_commits = p.size > 3? p.size - 3: 0;
 %>
 <li>
 	<span class="title"><a href="#"><%= username %></a> <span>pushed to</span> <%= ref_suffix %> at <a href="#"><%= name %></a> <%= date %></span>
