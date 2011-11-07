@@ -13,14 +13,17 @@ body {
 	}
 }
 
-.scrollview {
+.ui-mobile .ui-page {
 	position: absolute;
 	z-index: 1;
 	top: 39px;
 	bottom: 0;
 	left: 0;
 	width: 100%;
-	overflow: auto;
+
+	.ui-content {
+		padding: 0;
+	}
 }
 
 .clearfix:before,

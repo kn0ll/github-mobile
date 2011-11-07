@@ -31,7 +31,7 @@
         };
         _Class.prototype.select = function(e) {
           return this.model.set({
-            $selected: $(e.target)
+            $selected: $(e.target).closest('a')
           });
         };
         _Class.prototype.render = function(model, $selected) {

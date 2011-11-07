@@ -4,7 +4,7 @@
       el: $('#nav')
     });
     return new GH.Views.News({
-      el: $('#news .content')
+      el: $(':jqmData(role="content")', '#news')
     });
   });
 }).call(this);

@@ -1,14 +1,14 @@
 GH = ((gh) ->
 
 	# only enable scrollview for touch devices
-	return gh if not ('ontouchend' of document)
+	return gh if not $.support.touch
 
 	$ ->
 
 		s = '.scrollview'
 		$doc = $ document
 
-		# create each iscroll
+		### create each iscroll
 		$(s).each ->
 			$(this).data scrollview: new iScroll this
 			
@@ -20,6 +20,7 @@ GH = ((gh) ->
 		# to notify scrollview for refresh
 		$doc.bind 'modified', (e) ->
 			$(e.target).closest(s).data('scrollview').refresh()
+		####
 
 	gh
 

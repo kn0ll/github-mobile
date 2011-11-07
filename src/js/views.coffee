@@ -16,7 +16,7 @@ GH = ((gh) ->
 
 			select: (e) ->
 				this.model.set
-					$selected: $(e.target)
+					$selected: $(e.target).closest 'a'
 
 			render: (model, $selected) ->
 				$prev = model.previous '$selected'
