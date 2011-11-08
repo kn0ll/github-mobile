@@ -1,6 +1,9 @@
 (function() {
   var GH;
   GH = (function(gh) {
+    if (!$.support.touch) {
+      return gh;
+    }
     $(function() {
       var $body, ps, resize_scrollview;
       ps = '[data-role="page"]';

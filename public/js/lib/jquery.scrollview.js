@@ -737,15 +737,22 @@ $.extend(MomentumTracker.prototype, {
 	getPosition: function(){ return this.pos; }
 });
 
+// plucked from http://gsgd.co.uk/sandbox/jquery/easing
+$.extend($.easing, {
+	easeOutQuad: function (x, t, b, c, d) {
+		return -c *(t/=d)*(t-2) + b;
+	}
+});
 
+// taken from jquery mobile
+$.support.touch = "ontouchend" in document;
+
+// returns the el instead of scrollview for normal chaining
+// stores the scrollview on the element data for future reference 
 $.fn.scrollview = function(options) {
-	
-	// returns the el instead of scrollview for normal chaining
-	// stores the scrollview on the element data for future reference 
 	return this.data({
 		scrollview: new Scrollview(this, options)
 	});
-
 }
 
 })(jQuery,window,document); // End Component

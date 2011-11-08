@@ -1,7 +1,7 @@
 GH = ((gh) ->
 
 	# only enable scrollview for touch devices
-	return gh if not ("ontouchend" of document)
+	return gh if not $.support.touch
 
 	$ ->
 
