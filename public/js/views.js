@@ -61,6 +61,11 @@
             $selected: $(e.target).closest('a')
           });
         };
+        _Class.prototype.selectByHref = function(href) {
+          return this.model.set({
+            $selected: $("a[href='" + href + "']")
+          }, this.el);
+        };
         _Class.prototype.render = function(model, $selected) {
           var $prev;
           $prev = model.previous('$selected');

@@ -40,6 +40,10 @@ GH = ((gh) ->
 				this.model.set
 					$selected: $(e.target).closest 'a'
 
+			selectByHref: (href) ->
+				this.model.set
+					$selected: $ "a[href='#{href}']", this.el
+
 			render: (model, $selected) ->
 				$prev = model.previous '$selected'
 				$prev.removeClass 'selected' if $prev
