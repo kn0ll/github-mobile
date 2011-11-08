@@ -7,7 +7,7 @@ GH = ((gh) ->
 
 		initialize: ->
 			_.bindAll this
-			this.$content = $ ':jqmData(role="content")', this.el
+			this.$content = $ '[data-role="content"]', this.el
 			this.$content.addClass 'loading'
 		
 		pagecreate: ->

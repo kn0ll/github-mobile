@@ -264,7 +264,7 @@ $.extend(Scrollview.prototype, {
 	{
 		var svh = [];
 		this._$clip.parents(".ui-scrollview-clip").each(function(){
-			var d = $(this).jqmData("scrollview");
+			var d = $(this).data("scrollview");
 			if (d) svh.unshift(d);
 		});
 		return svh;

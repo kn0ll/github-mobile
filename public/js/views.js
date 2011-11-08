@@ -20,7 +20,7 @@
       };
       _Class.prototype.initialize = function() {
         _.bindAll(this);
-        this.$content = $(':jqmData(role="content")', this.el);
+        this.$content = $('[data-role="content"]', this.el);
         return this.$content.addClass('loading');
       };
       _Class.prototype.pagecreate = function() {};

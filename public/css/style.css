@@ -10,20 +10,12 @@ body a {
 body a:hover {
   text-decoration: underline;
 }
-.ui-mobile .ui-page {
+#content {
   position: absolute;
   z-index: 1;
   top: 39px;
-  bottom: 0;
   left: 0;
   width: 100%;
-}
-.ui-mobile .ui-page .ui-content {
-  padding: 0;
-}
-.ui-mobile .ui-page .ui-content.loading {
-  background: transparent url(/img/loader.gif) no-repeat bottom center;
-  height: 75px;
 }
 .clearfix:before, .clearfix:after {
   content: "\0020";
