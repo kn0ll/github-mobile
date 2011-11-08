@@ -1,18 +1,15 @@
 (function() {
   var GH;
   GH = (function(gh) {
-    if (!$.support.touch) {
-      return gh;
-    }
     $(function() {
       var $body, $win, ps, resize_scrollview;
-      ps = ':jqmData(role="page")';
+      ps = '[data-role="page"]';
       $win = $(window);
       $body = $('body');
       resize_scrollview = function($page) {
         var $c, hh;
-        $c = $(':jqmData(role="content")', $page);
-        hh = $(':jqmData(role="header")').outerHeight() || 0;
+        $c = $('[data-role="content"]', $page);
+        hh = $('[data-role="header"]').outerHeight() || 0;
         return $c.height(window.innerHeight - hh);
       };
       $body.css('overflow', 'hidden');
@@ -22,9 +19,7 @@
       $(ps).one('pageshow.scrollview', function(e) {
         var $view;
         $view = $('[data-role="content"]', $(this));
-        $view.scrollview({
-          direction: 'y'
-        });
+        $view.scrollview();
         return resize_scrollview($(e.target).closest(ps));
       });
       return $(ps).live('orientationchange', function() {

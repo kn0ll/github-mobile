@@ -6,8 +6,11 @@
 */
 (function($,window,document,undefined){
 
-jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
-	options: {
+var Scrollview = function(element, options) {
+
+	this.element = element;
+
+	this.options = $.extend({
 		fps:               60,    // Frames per second in msecs.
 		direction:         null,  // "x", "y", or null for both.
 	
@@ -31,7 +34,13 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		pagingEnabled:     false,
 		delayedClickSelector: "a,input,textarea,select,button,.ui-btn",
 		delayedClickEnabled: false
-	},
+	}, options);
+
+	this._create();
+
+};
+
+$.extend(Scrollview.prototype, {
 
 	_makePositioned: function($ele)
 	{
@@ -728,76 +737,15 @@ $.extend(MomentumTracker.prototype, {
 	getPosition: function(){ return this.pos; }
 });
 
-jQuery.widget( "mobile.scrolllistview", jQuery.mobile.scrollview, {
-	options: {
-		direction: "y"
-	},
 
-	_create: function() {
-		$.mobile.scrollview.prototype._create.call(this);
+$.fn.scrollview = function(options) {
 	
-		// Cache the dividers so we don't have to search for them everytime the
-		// view is scrolled.
-		//
-		// XXX: Note that we need to update this cache if we ever support lists
-		//      that can dynamically update their content.
-	
-		this._$dividers = this._$view.find(":jqmData(role='list-divider')");
-		this._lastDivider = null;
-	},
+	// returns the el instead of scrollview for normal chaining
+	// stores the scrollview on the element data for future reference 
+	return this.data({
+		scrollview: new Scrollview(this, options)
+	});
 
-	_setScrollPosition: function(x, y)
-	{
-		// Let the view scroll like it normally does.
-	
-		$.mobile.scrollview.prototype._setScrollPosition.call(this, x, y);
-
-		y = -y;
-
-		// Find the dividers for the list.
-
-		var $divs = this._$dividers;
-		var cnt = $divs.length;
-		var d = null;
-		var dy = 0;
-		var nd = null;
-
-		for (var i = 0; i < cnt; i++)
-		{
-			nd = $divs.get(i);
-			var t = nd.offsetTop;
-			if (y >= t)
-			{
-				d = nd;
-				dy = t;
-			}
-			else if (d)
-				break;
-		}
-
-		// If we found a divider to move position it at the top of the
-		// clip view.
-
-		if (d)
-		{
-			var h = d.offsetHeight;
-			var mxy = (d != nd) ? nd.offsetTop : (this._$view.get(0).offsetHeight);
-			if (y + h >= mxy)
-				y = (mxy - h) - dy;
-			else
-				y = y - dy;
-
-			// XXX: Need to convert this over to using $().css() and supporting the non-transform case.
-
-			var ld = this._lastDivider;
-			if (ld && d != ld) {
-				setElementTransform($(ld), 0, 0);
-			}
-			setElementTransform($(d), 0, y + "px");
-			this._lastDivider = d;
-
-		}
-	}
-});
+}
 
 })(jQuery,window,document); // End Component

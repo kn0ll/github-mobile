@@ -1,17 +1,17 @@
 GH = ((gh) ->
 
 	# only enable scrollview for touch devices
-	return gh if not $.support.touch
+	# return gh if not ("ontouchend" of document)
 
 	$ ->
 
-		ps = ':jqmData(role="page")'
+		ps = '[data-role="page"]'
 		$win = $ window
 		$body = $ 'body'
 
 		resize_scrollview =  ($page) ->
-			$c = $(':jqmData(role="content")', $page)
-			hh = $(':jqmData(role="header")').outerHeight() || 0
+			$c = $('[data-role="content"]', $page)
+			hh = $('[data-role="header"]').outerHeight() || 0
 			$c.height window.innerHeight - hh
 
 		$body.css 'overflow', 'hidden'
@@ -21,7 +21,7 @@ GH = ((gh) ->
 
 		$(ps).one 'pageshow.scrollview', (e) ->
 			$view = $ '[data-role="content"]', $ this
-			$view.scrollview direction: 'y'
+			$view.scrollview()
 			resize_scrollview $(e.target).closest ps
 
 		$(ps).live 'orientationchange', ->
