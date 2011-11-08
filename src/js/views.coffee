@@ -34,7 +34,7 @@ GH = ((gh) ->
 				self = this;
 				$.get '/jst/events.jst', (tmp) ->
 					self.el.empty().append _.template tmp, self
-					self.el.trigger 'modified'
+					self.el.trigger 'pageshow.scrollview'
 
 	gh.Views = new Views
 	gh

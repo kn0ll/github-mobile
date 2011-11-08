@@ -5,22 +5,30 @@ GH = ((gh) ->
 
 	$ ->
 
-		s = '.scrollview'
-		$doc = $ document
+		ps = ':jqmData(role="page")'
+		$win = $ window
+		$body = $ 'body'
 
-		### create each iscroll
-		$(s).each ->
-			$(this).data scrollview: new iScroll this
-			
-		# prevent scrolling the actual doc
-		$doc.bind 'touchmove', (e) ->
+		resize_scrollview =  ($page) ->
+			$c = $(':jqmData(role="content")', $page)
+			hh = $(':jqmData(role="header")').outerHeight() || 0
+			$c.height window.innerHeight - hh
+
+		$body.css 'overflow', 'hidden'
+
+		$win.bind 'touchmove', (e) ->
 			e.preventDefault()
-		
-		# trigger 'modified' from within scrollviews
-		# to notify scrollview for refresh
-		$doc.bind 'modified', (e) ->
-			$(e.target).closest(s).data('scrollview').refresh()
-		####
+
+		$(ps).one 'pageshow.scrollview', (e) ->
+			$view = $ '[data-role="content"]', $ this
+			$view.scrollview direction: 'y'
+			resize_scrollview $(e.target).closest ps
+
+		$(ps).live 'orientationchange', ->
+			setTimeout(->
+				scrollTo 0, 1
+				resize_scrollview $ '.ui-page'
+			, 500)
 
 	gh
 

@@ -61,7 +61,7 @@
           self = this;
           return $.get('/jst/events.jst', function(tmp) {
             self.el.empty().append(_.template(tmp, self));
-            return self.el.trigger('modified');
+            return self.el.trigger('pageshow.scrollview');
           });
         };
         return _Class;
