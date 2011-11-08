@@ -25,12 +25,14 @@
       };
       _Class.prototype.pagecreate = function() {};
       _Class.prototype.render = function() {
-        var self;
+        var $content, self;
         self = this;
+        $content = self.$content;
         return $.get(self.template, function(tmp) {
-          self.$content.empty().append(_.template(tmp, self));
-          self.$content.trigger('pageshow.scrollview');
-          return self.$content.removeClass('loading');
+          $content.empty();
+          $content.append(_.template(tmp, self));
+          $content.removeClass('loading');
+          return $content.trigger('modified');
         });
       };
       return _Class;

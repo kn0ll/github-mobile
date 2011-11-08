@@ -1,9 +1,6 @@
 (function() {
   var GH;
   GH = (function(gh) {
-    if (!("ontouchend" in document)) {
-      return gh;
-    }
     $(function() {
       var $body, ps, resize_scrollview;
       ps = '[data-role="page"]';
@@ -18,12 +15,14 @@
       $body.bind('touchmove', function(e) {
         return e.preventDefault();
       });
-      $(ps).one('pageshow.scrollview', function(e) {
+      $(ps).one('modified.scrollview', function(e) {
         var $view;
         $view = $('[data-role="content"]', $(ps));
-        $view.scrollview({
+        return $view.scrollview({
           direction: 'y'
         });
+      });
+      $(ps).live('modified.scrollview', function(e) {
         return resize_scrollview($(e.target).closest(ps));
       });
       return $(ps).live('orientationchange', function() {

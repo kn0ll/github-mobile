@@ -14,10 +14,12 @@ GH = ((gh) ->
 
 		render: ->
 			self = this
+			$content = self.$content
 			$.get self.template, (tmp) ->
-				self.$content.empty().append _.template tmp, self
-				self.$content.trigger 'pageshow.scrollview'
-				self.$content.removeClass 'loading'
+				$content.empty()
+				$content.append _.template(tmp, self)
+				$content.removeClass 'loading'
+				$content.trigger 'modified'
 
 
 	Views = class

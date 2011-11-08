@@ -1,7 +1,7 @@
 GH = ((gh) ->
 
 	# only enable scrollview for touch devices
-	return gh if not ("ontouchend" of document)
+	# return gh if not ("ontouchend" of document)
 
 	$ ->
 
@@ -18,9 +18,11 @@ GH = ((gh) ->
 		$body.bind 'touchmove', (e) ->
 			e.preventDefault()
 		
-		$(ps).one 'pageshow.scrollview', (e) ->
+		$(ps).one 'modified.scrollview', (e) ->
 			$view = $ '[data-role="content"]', $ ps
 			$view.scrollview direction: 'y'
+
+		$(ps).live 'modified.scrollview', (e) ->
 			resize_scrollview $(e.target).closest ps
 
 		$(ps).live 'orientationchange', ->
