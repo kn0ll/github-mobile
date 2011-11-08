@@ -21,6 +21,10 @@ body a:hover {
 .ui-mobile .ui-page .ui-content {
   padding: 0;
 }
+.ui-mobile .ui-page .ui-content.loading {
+  background: transparent url(/img/loader.gif) no-repeat bottom center;
+  height: 75px;
+}
 .clearfix:before, .clearfix:after {
   content: "\0020";
   display: block;

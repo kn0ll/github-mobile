@@ -20,17 +20,17 @@
       };
       _Class.prototype.initialize = function() {
         _.bindAll(this);
-        console.log(this.el);
-        return this.$content = $(':jqmData(role="content")', this.el);
+        this.$content = $(':jqmData(role="content")', this.el);
+        return this.$content.addClass('loading');
       };
       _Class.prototype.pagecreate = function() {};
       _Class.prototype.render = function() {
         var self;
         self = this;
-        console.log('rendering', this.template);
-        return $.get(this.template, function(tmp) {
+        return $.get(self.template, function(tmp) {
           self.$content.empty().append(_.template(tmp, self));
-          return self.$content.trigger('pageshow.scrollview');
+          self.$content.trigger('pageshow.scrollview');
+          return self.$content.removeClass('loading');
         });
       };
       return _Class;

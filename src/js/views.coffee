@@ -7,17 +7,17 @@ GH = ((gh) ->
 
 		initialize: ->
 			_.bindAll this
-			console.log this.el
 			this.$content = $ ':jqmData(role="content")', this.el
+			this.$content.addClass 'loading'
 		
 		pagecreate: ->
 
 		render: ->
 			self = this
-			console.log 'rendering', this.template
-			$.get this.template, (tmp) ->
+			$.get self.template, (tmp) ->
 				self.$content.empty().append _.template tmp, self
 				self.$content.trigger 'pageshow.scrollview'
+				self.$content.removeClass 'loading'
 
 
 	Views = class
