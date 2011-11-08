@@ -4,4 +4,7 @@ $ ->
 		el: $ '#nav'
 	
 	new GH.Views.News
-		el: $ ':jqmData(role="content")', '#news'
+		el: $ '#news'
+
+	new GH.Views.Profile
+		el: $ '#profile'

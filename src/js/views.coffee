@@ -1,5 +1,25 @@
 GH = ((gh) ->
 
+	PageView = class extends Backbone.View
+
+		events:
+			'pagecreate': 'pagecreate'
+
+		initialize: ->
+			_.bindAll this
+			console.log this.el
+			this.$content = $ ':jqmData(role="content")', this.el
+		
+		pagecreate: ->
+
+		render: ->
+			self = this
+			console.log 'rendering', this.template
+			$.get this.template, (tmp) ->
+				self.$content.empty().append _.template tmp, self
+				self.$content.trigger 'pageshow.scrollview'
+
+
 	Views = class
 
 		Nav: class extends Backbone.View
@@ -23,18 +43,21 @@ GH = ((gh) ->
 				$prev.removeClass 'selected' if $prev
 				$selected.addClass 'selected'	
 
-		News: class extends Backbone.View
+		News: class extends PageView
 
-			initialize: ->
-				_.bindAll this
+			template: '/jst/events.jst'
+
+			pagecreate: ->
 				this.collection = new gh.Collections.News
 				this.collection.fetch success: this.render
 
-			render: ->
-				self = this;
-				$.get '/jst/events.jst', (tmp) ->
-					self.el.empty().append _.template tmp, self
-					self.el.trigger 'pageshow.scrollview'
+		Profile: class extends PageView
+
+			template: '/jst/profile.jst'
+
+			pagecreate: ->
+				this.model = gh.User
+				this.render()
 
 	gh.Views = new Views
 	gh

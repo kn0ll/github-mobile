@@ -9,7 +9,32 @@
     return child;
   };
   GH = (function(gh) {
-    var Views;
+    var PageView, Views;
+    PageView = (function() {
+      __extends(_Class, Backbone.View);
+      function _Class() {
+        _Class.__super__.constructor.apply(this, arguments);
+      }
+      _Class.prototype.events = {
+        'pagecreate': 'pagecreate'
+      };
+      _Class.prototype.initialize = function() {
+        _.bindAll(this);
+        console.log(this.el);
+        return this.$content = $(':jqmData(role="content")', this.el);
+      };
+      _Class.prototype.pagecreate = function() {};
+      _Class.prototype.render = function() {
+        var self;
+        self = this;
+        console.log('rendering', this.template);
+        return $.get(this.template, function(tmp) {
+          self.$content.empty().append(_.template(tmp, self));
+          return self.$content.trigger('pageshow.scrollview');
+        });
+      };
+      return _Class;
+    })();
     Views = (function() {
       function _Class() {}
       _Class.prototype.Nav = (function() {
@@ -45,24 +70,28 @@
         return _Class;
       })();
       _Class.prototype.News = (function() {
-        __extends(_Class, Backbone.View);
+        __extends(_Class, PageView);
         function _Class() {
           _Class.__super__.constructor.apply(this, arguments);
         }
-        _Class.prototype.initialize = function() {
-          _.bindAll(this);
+        _Class.prototype.template = '/jst/events.jst';
+        _Class.prototype.pagecreate = function() {
           this.collection = new gh.Collections.News;
           return this.collection.fetch({
             success: this.render
           });
         };
-        _Class.prototype.render = function() {
-          var self;
-          self = this;
-          return $.get('/jst/events.jst', function(tmp) {
-            self.el.empty().append(_.template(tmp, self));
-            return self.el.trigger('pageshow.scrollview');
-          });
+        return _Class;
+      })();
+      _Class.prototype.Profile = (function() {
+        __extends(_Class, PageView);
+        function _Class() {
+          _Class.__super__.constructor.apply(this, arguments);
+        }
+        _Class.prototype.template = '/jst/profile.jst';
+        _Class.prototype.pagecreate = function() {
+          this.model = gh.User;
+          return this.render();
         };
         return _Class;
       })();

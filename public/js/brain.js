@@ -3,8 +3,11 @@
     new GH.Views.Nav({
       el: $('#nav')
     });
-    return new GH.Views.News({
-      el: $(':jqmData(role="content")', '#news')
+    new GH.Views.News({
+      el: $('#news')
+    });
+    return new GH.Views.Profile({
+      el: $('#profile')
     });
   });
 }).call(this);
