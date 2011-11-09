@@ -11,29 +11,37 @@ GH = ((gh) ->
 		events:
 			'pagecreate': 'pagecreate' # triggered then the dom element is created
 
+		# set options and create element
 		initialize: (options) ->
 			_.bindAll this
 			_.extend this, options
 			this.build()
 			
+		# create el in loading state
 		build: ->
 			this.el = $(this.make this.tagName, class: this.className)
 			this.el.addClass 'loading'
+			# hide old views, show new view
+			this.$container.empty()
 			this.$container.append this.el
+			# initiate scrollview
 			GH.Widgets.Scrollview this.el, this.offset
+			# notify widget was created
 			this.pagecreate()
 		
+		# individual views should override this to decide how to load content
 		pagecreate: ->
-
+		
+		# default view render empties and re-populates this.el
 		render: ->
 			self = this
-			el = self.el
 			$.get self.template, (tmp) ->
-				el.empty()
-				el.append _.template(tmp, self)
-				el.removeClass 'loading'
-				el.trigger 'modified'
-
+				self.el.empty()
+				self.el.append _.template(tmp, self)
+				self.el.removeClass 'loading'
+				# notify scrollview of content change
+				self.el.trigger 'modified'
+		
 	Views = class
 
 		Nav: class extends Backbone.View

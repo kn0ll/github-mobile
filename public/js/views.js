@@ -32,20 +32,20 @@
           "class": this.className
         }));
         this.el.addClass('loading');
+        this.$container.empty();
         this.$container.append(this.el);
         GH.Widgets.Scrollview(this.el, this.offset);
         return this.pagecreate();
       };
       _Class.prototype.pagecreate = function() {};
       _Class.prototype.render = function() {
-        var el, self;
+        var self;
         self = this;
-        el = self.el;
         return $.get(self.template, function(tmp) {
-          el.empty();
-          el.append(_.template(tmp, self));
-          el.removeClass('loading');
-          return el.trigger('modified');
+          self.el.empty();
+          self.el.append(_.template(tmp, self));
+          self.el.removeClass('loading');
+          return self.el.trigger('modified');
         });
       };
       return _Class;

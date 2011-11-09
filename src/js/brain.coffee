@@ -22,6 +22,9 @@ $ ->
 		
 		profile: ->
 			Nav.selectByHref '/profile'
+			new GH.Views.Profile
+				$container: $ '#content'
+				offset:  Nav.el.height()
 
 	router = new Router
 

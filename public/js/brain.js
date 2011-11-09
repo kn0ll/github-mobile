@@ -34,7 +34,11 @@
         });
       };
       _Class.prototype.profile = function() {
-        return Nav.selectByHref('/profile');
+        Nav.selectByHref('/profile');
+        return new GH.Views.Profile({
+          $container: $('#content'),
+          offset: Nav.el.height()
+        });
       };
       return _Class;
     })();
