@@ -5,13 +5,13 @@ GH = ((gh) ->
 
 	$ ->
 
-		ps = '[data-role="page"]'
+		ps = '.page'
 		$body = $ 'body'
 
 		# resize the content views based on header size
 		resize_scrollview = ($page) ->
-			$c = $('[data-role="content"]', $page)
-			hh = $('[data-role="header"]').outerHeight() || 0
+			$c = $ '.content', $page
+			hh = $('#nav').outerHeight() || 0
 			$c.height window.innerHeight - hh
 
 		# so body is "fixed" and you can only scroll scrollview
@@ -21,7 +21,7 @@ GH = ((gh) ->
 		
 		# initiate the scrollview the first time 'modified' is called on/inside of it
 		$(ps).one 'modified.scrollview', (e) ->
-			$view = $ '[data-role="content"]', $ ps
+			$view = $ '.content', $ ps
 			$view.scrollview direction: 'y'
 
 		# update size on content modified

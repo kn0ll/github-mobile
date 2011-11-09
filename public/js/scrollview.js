@@ -6,12 +6,12 @@
     }
     $(function() {
       var $body, ps, resize_scrollview;
-      ps = '[data-role="page"]';
+      ps = '.page';
       $body = $('body');
       resize_scrollview = function($page) {
         var $c, hh;
-        $c = $('[data-role="content"]', $page);
-        hh = $('[data-role="header"]').outerHeight() || 0;
+        $c = $('.content', $page);
+        hh = $('#nav').outerHeight() || 0;
         return $c.height(window.innerHeight - hh);
       };
       $body.css('overflow', 'hidden');
@@ -20,7 +20,7 @@
       });
       $(ps).one('modified.scrollview', function(e) {
         var $view;
-        $view = $('[data-role="content"]', $(ps));
+        $view = $('.content', $(ps));
         return $view.scrollview({
           direction: 'y'
         });

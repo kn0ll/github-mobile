@@ -7,7 +7,7 @@ GH = ((gh) ->
 
 		initialize: ->
 			_.bindAll this
-			this.$content = $ '[data-role="content"]', this.el
+			this.$content = $ '.content', this.el
 			this.$content.addClass 'loading'
 		
 		pagecreate: ->
@@ -20,7 +20,6 @@ GH = ((gh) ->
 				$content.append _.template(tmp, self)
 				$content.removeClass 'loading'
 				$content.trigger 'modified'
-
 
 	Views = class
 

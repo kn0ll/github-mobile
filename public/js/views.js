@@ -20,7 +20,7 @@
       };
       _Class.prototype.initialize = function() {
         _.bindAll(this);
-        this.$content = $('[data-role="content"]', this.el);
+        this.$content = $('.content', this.el);
         return this.$content.addClass('loading');
       };
       _Class.prototype.pagecreate = function() {};
