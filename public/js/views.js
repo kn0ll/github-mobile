@@ -20,19 +20,19 @@
       };
       _Class.prototype.initialize = function() {
         _.bindAll(this);
-        this.$content = $('.content', this.el);
+        this.$content = this.el;
         return this.$content.addClass('loading');
       };
       _Class.prototype.pagecreate = function() {};
       _Class.prototype.render = function() {
-        var $content, self;
+        var el, self;
         self = this;
-        $content = self.$content;
+        el = self.el;
         return $.get(self.template, function(tmp) {
-          $content.empty();
-          $content.append(_.template(tmp, self));
-          $content.removeClass('loading');
-          return $content.trigger('modified');
+          el.empty();
+          el.append(_.template(tmp, self));
+          el.removeClass('loading');
+          return el.trigger('modified');
         });
       };
       return _Class;

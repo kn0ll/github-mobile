@@ -7,19 +7,19 @@ GH = ((gh) ->
 
 		initialize: ->
 			_.bindAll this
-			this.$content = $ '.content', this.el
+			this.$content = this.el
 			this.$content.addClass 'loading'
 		
 		pagecreate: ->
 
 		render: ->
 			self = this
-			$content = self.$content
+			el = self.el
 			$.get self.template, (tmp) ->
-				$content.empty()
-				$content.append _.template(tmp, self)
-				$content.removeClass 'loading'
-				$content.trigger 'modified'
+				el.empty()
+				el.append _.template(tmp, self)
+				el.removeClass 'loading'
+				el.trigger 'modified'
 
 	Views = class
 

@@ -1,18 +1,17 @@
 GH = ((gh) ->
 
-	# only enable scrollview for touch devices
-	return gh if not $.support.touch
+	gh.Widgets ?= {}
 
-	$ ->
+	gh.Widgets.Scrollview = ($ps, offset) ->
 
-		ps = '.page'
+		# only enable scrollview for touch devices
+		return if not $.support.touch
+
 		$body = $ 'body'
 
 		# resize the content views based on header size
-		resize_scrollview = ($page) ->
-			$c = $ '.content', $page
-			hh = $('#nav').outerHeight() || 0
-			$c.height window.innerHeight - hh
+		resize_scrollview = ->
+			$ps.height window.innerHeight - offset
 
 		# so body is "fixed" and you can only scroll scrollview
 		$body.css 'overflow', 'hidden'
@@ -20,19 +19,19 @@ GH = ((gh) ->
 			e.preventDefault()
 		
 		# initiate the scrollview the first time 'modified' is called on/inside of it
-		$(ps).one 'modified.scrollview', (e) ->
-			$view = $ '.content', $ ps
+		$ps.one 'modified.scrollview', (e) ->
+			$view = $ps
 			$view.scrollview direction: 'y'
 
 		# update size on content modified
-		$(ps).live 'modified.scrollview', (e) ->
-			resize_scrollview $(e.target).closest ps
+		$ps.live 'modified.scrollview', (e) ->
+			resize_scrollview $ps
 
 		# update size on orientation change
-		$(ps).live 'orientationchange', ->
+		$ps.live 'orientationchange', ->
 			setTimeout(->
 				scrollTo 0, 1
-				resize_scrollview $ ps
+				resize_scrollview $ps
 			, 500)
 
 	gh

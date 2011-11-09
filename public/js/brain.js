@@ -18,8 +18,11 @@
     Profile = new GH.Views.Profile({
       el: $('#profile')
     });
-    News.el.trigger('pagecreate');
-    Profile.el.trigger('pagecreate');
+    $(function() {
+      GH.Widgets.Scrollview($('.page'), Nav.el.height());
+      News.el.trigger('pagecreate');
+      return Profile.el.trigger('pagecreate');
+    });
     Router = (function() {
       __extends(_Class, Backbone.Router);
       function _Class() {

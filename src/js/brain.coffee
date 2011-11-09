@@ -9,8 +9,12 @@ $ ->
 	Profile = new GH.Views.Profile
 		el: $ '#profile'
 	
-	News.el.trigger 'pagecreate'
-	Profile.el.trigger 'pagecreate'
+	$ ->
+
+		GH.Widgets.Scrollview $('.page'), Nav.el.height()
+
+		News.el.trigger 'pagecreate'
+		Profile.el.trigger 'pagecreate'
 	
 	Router = class extends Backbone.Router
 
