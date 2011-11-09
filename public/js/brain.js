@@ -8,7 +8,8 @@
     return child;
   };
   $(function() {
-    var Nav, Router, router;
+    var Nav, Router, pages, router;
+    pages = $('#content').pages();
     Nav = new GH.Views.Nav({
       el: $('#nav')
     });
@@ -27,18 +28,24 @@
         return console.log('routed: index');
       };
       _Class.prototype.news = function() {
+        var el;
         Nav.selectByHref('/news');
-        return new GH.Views.News({
-          $container: $('#content'),
+        el = (new GH.Views.News({
           offset: Nav.el.height()
-        });
+        })).el;
+        if (pages) {
+          return pages.create(el);
+        }
       };
       _Class.prototype.profile = function() {
+        var el;
         Nav.selectByHref('/profile');
-        return new GH.Views.Profile({
-          $container: $('#content'),
+        el = (new GH.Views.Profile({
           offset: Nav.el.height()
-        });
+        })).el;
+        if (pages) {
+          return pages.create(el);
+        }
       };
       return _Class;
     })();

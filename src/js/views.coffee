@@ -5,7 +5,6 @@ GH = ((gh) ->
 		tagName: 'div'
 		className: 'page'
 		
-		$container: false # container el pages should be appended to
 		offset: 0		  # height offset of els outside the scrollview
 
 		events:
@@ -21,9 +20,6 @@ GH = ((gh) ->
 		build: ->
 			this.el = $(this.make this.tagName, class: this.className)
 			this.el.addClass 'loading'
-			# hide old views, show new view
-			this.$container.empty()
-			this.$container.append this.el
 			# initiate scrollview
 			GH.Widgets.Scrollview this.el, this.offset
 			# notify widget was created

@@ -17,7 +17,6 @@
       }
       _Class.prototype.tagName = 'div';
       _Class.prototype.className = 'page';
-      _Class.prototype.$container = false;
       _Class.prototype.offset = 0;
       _Class.prototype.events = {
         'pagecreate': 'pagecreate'
@@ -32,8 +31,6 @@
           "class": this.className
         }));
         this.el.addClass('loading');
-        this.$container.empty();
-        this.$container.append(this.el);
         GH.Widgets.Scrollview(this.el, this.offset);
         return this.pagecreate();
       };

@@ -1,5 +1,8 @@
 $ ->
 
+	# pages thing
+	pages = $('#content').pages()
+
 	Nav = new GH.Views.Nav
 		el: $ '#nav'
 	
@@ -16,15 +19,15 @@ $ ->
 		
 		news: ->
 			Nav.selectByHref '/news'
-			new GH.Views.News
-				$container: $ '#content'
-				offset:  Nav.el.height()
+			el = (new GH.Views.News
+				offset:  Nav.el.height()).el
+			pages.create(el) if pages
 		
 		profile: ->
 			Nav.selectByHref '/profile'
-			new GH.Views.Profile
-				$container: $ '#content'
-				offset:  Nav.el.height()
+			el = (new GH.Views.Profile
+				offset:  Nav.el.height()).el
+			pages.create(el) if pages
 
 	router = new Router
 
