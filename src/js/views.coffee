@@ -2,13 +2,26 @@ GH = ((gh) ->
 
 	PageView = class extends Backbone.View
 
-		events:
-			'pagecreate': 'pagecreate'
+		tagName: 'div'
+		className: 'page'
+		
+		$container: false # container el pages should be appended to
+		offset: 0		  # height offset of els outside the scrollview
 
-		initialize: ->
+		events:
+			'pagecreate': 'pagecreate' # triggered then the dom element is created
+
+		initialize: (options) ->
 			_.bindAll this
-			this.$content = this.el
-			this.$content.addClass 'loading'
+			_.extend this, options
+			this.build()
+			
+		build: ->
+			this.el = $(this.make this.tagName, class: this.className)
+			this.el.addClass 'loading'
+			this.$container.append this.el
+			GH.Widgets.Scrollview this.el, this.offset
+			this.pagecreate()
 		
 		pagecreate: ->
 

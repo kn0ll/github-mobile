@@ -25,10 +25,10 @@
           direction: 'y'
         });
       });
-      $ps.live('modified.scrollview', function(e) {
+      $ps.bind('modified.scrollview', function(e) {
         return resize_scrollview($ps);
       });
-      return $ps.live('orientationchange', function() {
+      return $ps.bind('orientationchange', function() {
         return setTimeout(function() {
           scrollTo(0, 1);
           return resize_scrollview($ps);

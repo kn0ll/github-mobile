@@ -24,11 +24,11 @@ GH = ((gh) ->
 			$view.scrollview direction: 'y'
 
 		# update size on content modified
-		$ps.live 'modified.scrollview', (e) ->
+		$ps.bind 'modified.scrollview', (e) ->
 			resize_scrollview $ps
 
 		# update size on orientation change
-		$ps.live 'orientationchange', ->
+		$ps.bind 'orientationchange', ->
 			setTimeout(->
 				scrollTo 0, 1
 				resize_scrollview $ps

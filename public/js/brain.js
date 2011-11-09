@@ -8,20 +8,9 @@
     return child;
   };
   $(function() {
-    var Nav, News, Profile, Router, router;
+    var Nav, Router, router;
     Nav = new GH.Views.Nav({
       el: $('#nav')
-    });
-    News = new GH.Views.News({
-      el: $('#news')
-    });
-    Profile = new GH.Views.Profile({
-      el: $('#profile')
-    });
-    $(function() {
-      GH.Widgets.Scrollview($('.page'), Nav.el.height());
-      News.el.trigger('pagecreate');
-      return Profile.el.trigger('pagecreate');
     });
     Router = (function() {
       __extends(_Class, Backbone.Router);
@@ -35,10 +24,14 @@
         '/profile': 'profile'
       };
       _Class.prototype.index = function() {
-        return console.log('wat');
+        return console.log('routed: index');
       };
       _Class.prototype.news = function() {
-        return Nav.selectByHref('/news');
+        Nav.selectByHref('/news');
+        return new GH.Views.News({
+          $container: $('#content'),
+          offset: Nav.el.height()
+        });
       };
       _Class.prototype.profile = function() {
         return Nav.selectByHref('/profile');
@@ -48,12 +41,8 @@
     router = new Router;
     Backbone.history.start();
     return $(function() {
-      var route;
-      route = function(href) {
-        return router.navigate(href, true);
-      };
-      return $('a').click(function(e) {
-        route($(this).attr('href'));
+      return $('a').live('click', function(e) {
+        router.navigate($(this).attr('href'), true);
         return e.preventDefault();
       });
     });

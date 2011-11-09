@@ -3,19 +3,6 @@ $ ->
 	Nav = new GH.Views.Nav
 		el: $ '#nav'
 	
-	News = new GH.Views.News
-		el: $ '#news'
-
-	Profile = new GH.Views.Profile
-		el: $ '#profile'
-	
-	$ ->
-
-		GH.Widgets.Scrollview $('.page'), Nav.el.height()
-
-		News.el.trigger 'pagecreate'
-		Profile.el.trigger 'pagecreate'
-	
 	Router = class extends Backbone.Router
 
 		routes:
@@ -25,11 +12,14 @@ $ ->
 			'/profile': 'profile'
 
 		index: ->
-			console.log 'wat'
+			console.log 'routed: index'
 		
 		news: ->
 			Nav.selectByHref '/news'
-
+			new GH.Views.News
+				$container: $ '#content'
+				offset:  Nav.el.height()
+		
 		profile: ->
 			Nav.selectByHref '/profile'
 
@@ -39,9 +29,7 @@ $ ->
 
 	$ ->
 
-		route = (href) ->
-			router.navigate href, true
-
-		$('a').click (e) ->
-			route $(this).attr('href')
+		# anchors should be routed with backbone
+		$('a').live 'click', (e) ->
+			router.navigate $(this).attr('href'), true
 			e.preventDefault();

@@ -15,13 +15,26 @@
       function _Class() {
         _Class.__super__.constructor.apply(this, arguments);
       }
+      _Class.prototype.tagName = 'div';
+      _Class.prototype.className = 'page';
+      _Class.prototype.$container = false;
+      _Class.prototype.offset = 0;
       _Class.prototype.events = {
         'pagecreate': 'pagecreate'
       };
-      _Class.prototype.initialize = function() {
+      _Class.prototype.initialize = function(options) {
         _.bindAll(this);
-        this.$content = this.el;
-        return this.$content.addClass('loading');
+        _.extend(this, options);
+        return this.build();
+      };
+      _Class.prototype.build = function() {
+        this.el = $(this.make(this.tagName, {
+          "class": this.className
+        }));
+        this.el.addClass('loading');
+        this.$container.append(this.el);
+        GH.Widgets.Scrollview(this.el, this.offset);
+        return this.pagecreate();
       };
       _Class.prototype.pagecreate = function() {};
       _Class.prototype.render = function() {
