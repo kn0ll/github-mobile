@@ -107,6 +107,12 @@
           _Class.__super__.constructor.apply(this, arguments);
         }
         _Class.prototype.template = '/jst/profile.jst';
+        _Class.prototype.initialize = function(options) {
+          this.user = new GH.Models.User({
+            login: options.username
+          });
+          return PageView.prototype.initialize.call(this, options);
+        };
         _Class.prototype.pagecreate = function() {
           return $.waitjax(this.user.fetch(), __bind(function() {
             return this.render();

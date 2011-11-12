@@ -77,6 +77,11 @@ GH = ((gh) ->
 
 			template: '/jst/profile.jst'
 
+			initialize: (options) ->
+				this.user = new GH.Models.User
+					login: options.username
+				PageView.prototype.initialize.call this, options
+
 			pagecreate: =>
 				$.waitjax this.user.fetch(), =>
 					this.render()

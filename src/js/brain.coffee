@@ -1,6 +1,5 @@
 $ ->
 
-	# pages thing
 	pages = $('#content').pages()
 
 	Nav = new GH.Views.Nav
@@ -19,18 +18,16 @@ $ ->
 			console.log 'routed: index'
 		
 		news: ->
+			news = new GH.Views.News
+				offset:  Nav.el.height()
 			Nav.selectByHref '/news'
-			el = (new GH.Views.News
-				offset:  Nav.el.height()).el
-			pages.create(el) if pages
+			pages.create(news.el) if pages
 		
 		profile: (username, repository) ->
-			user = new GH.Models.User
-				login: username
 			profile = new GH.Views.Profile
 				offset:  Nav.el.height()
-				user: user
-			if user.login is User.login
+				username: username
+			if username is User.login
 				Nav.selectByHref "/#{username}"
 			pages.create(profile.el) if pages
 
@@ -43,7 +40,6 @@ $ ->
 
 	$ ->
 
-		# anchors should be routed with backbone
 		$('a').live 'click', (e) ->
 			router.navigate $(this).attr('href'), true
-			e.preventDefault();
+			e.preventDefault()

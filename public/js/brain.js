@@ -29,25 +29,22 @@
         return console.log('routed: index');
       };
       _Class.prototype.news = function() {
-        var el;
-        Nav.selectByHref('/news');
-        el = (new GH.Views.News({
+        var news;
+        news = new GH.Views.News({
           offset: Nav.el.height()
-        })).el;
+        });
+        Nav.selectByHref('/news');
         if (pages) {
-          return pages.create(el);
+          return pages.create(news.el);
         }
       };
       _Class.prototype.profile = function(username, repository) {
-        var profile, user;
-        user = new GH.Models.User({
-          login: username
-        });
+        var profile;
         profile = new GH.Views.Profile({
           offset: Nav.el.height(),
-          user: user
+          username: username
         });
-        if (user.login === User.login) {
+        if (username === User.login) {
           Nav.selectByHref("/" + username);
         }
         if (pages) {
