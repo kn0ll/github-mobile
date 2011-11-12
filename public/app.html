@@ -20,28 +20,32 @@
 	<div id="nav" class="clearfix">
 		<h1>Github Mobile</h1>
 		<a href="/news"><span>News Feed</span></a>
-		<a href="/profile"><span><%= user.login %></span></a>
+		<a href="/<%= user.login %>"><span><%= user.login %></span></a>
 	</div>
 
 	<div id="content">
 	</div>
 
+	<script>
+		var GH = {};
+		var User = <%= JSON.stringify(user) %>;
+	</script>
+
+	<!-- core deps -->
 	<script src="/js/lib/jquery-1.6.4.js"></script>
 	<script src="/js/lib/underscore-1.2.1.js"></script>
 	<script src="/js/lib/backbone-0.5.3.js"></script>
+
+	<!-- helper libs -->
 	<script src="/js/lib/date.extensions.js"></script>
-	
+	<script src="/js/lib/jquery.waitjax.js"></script>
+
+	<!-- ui libs -->
 	<script src="/js/lib/jquery.scrollview.js"></script>
 	<script src="/js/lib/jquery.pages.js"></script>
-
-	<script>
-		var GH = (function(gh) {
-			gh.User = new Backbone.Model(<%= JSON.stringify(user) %>);
-			return gh;
-		})(window['GH'] || {});
-	</script>
 		
 	<script src="/js/scrollview.js"></script>
+	<script src="/js/models.js"></script>
 	<script src="/js/collections.js"></script>
 	<script src="/js/views.js"></script>
 	<script src="/js/brain.js"></script>

@@ -7,7 +7,7 @@
     child.prototype = new ctor;
     child.__super__ = parent.prototype;
     return child;
-  };
+  }, __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   GH = (function(gh) {
     var PageView, Views;
     PageView = (function() {
@@ -38,12 +38,12 @@
       _Class.prototype.render = function() {
         var self;
         self = this;
-        return $.get(self.template, function(tmp) {
+        return $.get(self.template, __bind(function(tmp) {
           self.el.empty();
-          self.el.append(_.template(tmp, self));
+          self.el.append(_.template(tmp, this));
           self.el.removeClass('loading');
           return self.el.trigger('modified');
-        });
+        }, this));
       };
       return _Class;
     })();
@@ -103,17 +103,19 @@
       _Class.prototype.Profile = (function() {
         __extends(_Class, PageView);
         function _Class() {
+          this.pagecreate = __bind(this.pagecreate, this);
           _Class.__super__.constructor.apply(this, arguments);
         }
         _Class.prototype.template = '/jst/profile.jst';
         _Class.prototype.pagecreate = function() {
-          this.model = gh.User;
-          return this.render();
+          return $.waitjax(this.user.fetch(), __bind(function() {
+            return this.render();
+          }, this));
         };
         return _Class;
       })();
       return _Class;
-    })();
+    }).call(this);
     gh.Views = new Views;
     return gh;
   })(window['GH'] || {});

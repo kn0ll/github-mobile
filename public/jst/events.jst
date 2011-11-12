@@ -1,5 +1,13 @@
+<%
+function escapeHTML(text) {
+    return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+%>
+
 <ul class="events">
-<% collection.each(function(model) {
+
+<%
+collection.each(function(model) {
 	var type = model.get('type'),
 		p = model.get('payload'),
 		a = model.get('actor'),
@@ -24,7 +32,7 @@ if (type == 'IssuesEvent') {
 		details = p.issue.title;
 %>
 <li>
-	<span class="title"><a href="#"><%= username %></a> <span><%= action %></span> <a href="#">issue <%= number %></a> on <a href="#"><%= name %></a> <%= date %></span>
+	<span class="title"><a href="/<%= username %>"><%= username %></a> <span><%= action %></span> <a href="#">issue <%= number %></a> on <a href="#"><%= name %></a> <%= date %></span>
 	<div class="details clearfix">
 		<div class="gravatar"><img src="https://secure.gravatar.com/avatar/<%= gravatar_id %>" /></div>
 		<span class="message"><%= details %></span>
@@ -46,10 +54,10 @@ if (type == 'IssuesEvent') {
 		details = p.comment.body;
 %>
 <li>
-	<span class="title"><a href="#"><%= username %></a> <span>commented</span> on <a href="#"><%= type_type %> <%= number %></a> on <a href="#"><%= name %></a> <%= date %></span>
+	<span class="title"><a href="/<%= username %>"><%= username %></a> <span>commented</span> on <a href="#"><%= type_type %> <%= number %></a> on <a href="#"><%= name %></a> <%= date %></span>
 	<div class="details clearfix">
 		<div class="gravatar"><img src="https://secure.gravatar.com/avatar/<%= gravatar_id %>" /></div>
-		<span class="message"><%= details %></span>
+		<span class="message"><%= escapeHTML(details) %></span>
 	</div>
 </li>
 
@@ -67,7 +75,7 @@ if (type == 'IssuesEvent') {
 		ref = p.ref;
 %>
 <li>
-	<span class="title"><a href="#"><%= username %></a> <span>deleted</span> <%= ref_type %> <%= ref %> at <a href="#"><%= name %></a> <%= date %></span>
+	<span class="title"><a href="/<%= username %>"><%= username %></a> <span>deleted</span> <%= ref_type %> <%= ref %> at <a href="#"><%= name %></a> <%= date %></span>
 	<div class="details clearfix">
 		<div class="gravatar"><img src="https://secure.gravatar.com/avatar/<%= gravatar_id %>" /></div>
 		<span class="message">Deleted <%= ref_type %> was at <em>/<%= name %>/tree/<%= ref %></em></span>
@@ -88,7 +96,7 @@ if (type == 'IssuesEvent') {
 		ref = p.ref;
 %>
 <li>
-	<span class="title"><a href="#"><%= username %></a> <span>created</span> <%= ref_type %> <a href="#"><%= ref %></a> at <a href="#"><%= name %></a> <%= date %></span>
+	<span class="title"><a href="/<%= username %>"><%= username %></a> <span>created</span> <%= ref_type %> <a href="#"><%= ref %></a> at <a href="#"><%= name %></a> <%= date %></span>
 	<div class="details clearfix">
 		<div class="gravatar"><img src="https://secure.gravatar.com/avatar/<%= gravatar_id %>" /></div>
 		<span class="message">
@@ -113,7 +121,7 @@ if (type == 'IssuesEvent') {
 		more_commits = p.size > 3? p.size - 3: 0;
 %>
 <li>
-	<span class="title"><a href="#"><%= username %></a> <span>pushed to</span> <%= ref_suffix %> at <a href="#"><%= name %></a> <%= date %></span>
+	<span class="title"><a href="/<%= username %>"><%= username %></a> <span>pushed to</span> <%= ref_suffix %> at <a href="/<%= name %>"><%= name %></a> <%= date %></span>
 	<div class="details clearfix">
 		<div class="gravatar"><img src="https://secure.gravatar.com/avatar/<%= gravatar_id %>" /></div>
 		<span class="message">

@@ -31,9 +31,9 @@ GH = ((gh) ->
 		# default view render empties and re-populates this.el
 		render: ->
 			self = this
-			$.get self.template, (tmp) ->
+			$.get self.template, (tmp) =>
 				self.el.empty()
-				self.el.append _.template(tmp, self)
+				self.el.append _.template(tmp, this)
 				self.el.removeClass 'loading'
 				# notify scrollview of content change
 				self.el.trigger 'modified'
@@ -77,9 +77,9 @@ GH = ((gh) ->
 
 			template: '/jst/profile.jst'
 
-			pagecreate: ->
-				this.model = gh.User
-				this.render()
+			pagecreate: =>
+				$.waitjax this.user.fetch(), =>
+					this.render()
 
 	gh.Views = new Views
 	gh

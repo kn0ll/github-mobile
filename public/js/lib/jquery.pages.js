@@ -16,7 +16,7 @@ var Pages = function(element, options) {
 $.extend(Pages.prototype, {
 
 	_create: function() {
-		console.log('creating pages controller for2', $(this.element));
+		console.log('creating pages controller for', $(this.element));
 	},
 
 	create: function(el) {
@@ -88,8 +88,6 @@ var Page = Backbone.View.extend({
 });
 
 $.fn.pages = function(options) {
-
-	$('body').css('overflow', 'hidden');
 
 	return new Pages(this, options);
 

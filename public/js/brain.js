@@ -22,7 +22,8 @@
         '': 'index',
         '/': 'index',
         '/news': 'news',
-        '/profile': 'profile'
+        '/:username': 'profile',
+        '/:username/:repository': 'repository'
       };
       _Class.prototype.index = function() {
         return console.log('routed: index');
@@ -37,15 +38,24 @@
           return pages.create(el);
         }
       };
-      _Class.prototype.profile = function() {
-        var el;
-        Nav.selectByHref('/profile');
-        el = (new GH.Views.Profile({
-          offset: Nav.el.height()
-        })).el;
-        if (pages) {
-          return pages.create(el);
+      _Class.prototype.profile = function(username, repository) {
+        var profile, user;
+        user = new GH.Models.User({
+          login: username
+        });
+        profile = new GH.Views.Profile({
+          offset: Nav.el.height(),
+          user: user
+        });
+        if (user.login === User.login) {
+          Nav.selectByHref("/" + username);
         }
+        if (pages) {
+          return pages.create(profile.el);
+        }
+      };
+      _Class.prototype.repository = function() {
+        return console.log('routed: repository');
       };
       return _Class;
     })();

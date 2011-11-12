@@ -1,1 +1,19 @@
-<p>LMAO PROFILE LOADED</p>
+<div class="profile">
+
+	<h1><%= user.get('login') %></h1>
+	
+	<ul class="info">
+		<li>Name: <%= user.get('name') %></li>
+		<li>Email: <%= user.get('email') %></li>
+		<li>Company: <%= user.get('company') %></li>
+		<li>Location: <%= user.get('location') %></li>
+		<li>Member Since: <%= user.get('created_at') %></li>
+	</ul>
+
+	<ul class="stats">
+		<li><%= user.get('followers') %> followers</li>
+		<li><%= user.get('public_gists') %> gists</li>
+		<li><%= user.get('public_repos') %> repos</li>
+	</ul>
+
+</div>

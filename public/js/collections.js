@@ -10,7 +10,7 @@
   };
   GH = (function(gh) {
     var Base, Collections, username;
-    username = gh.User.get('login');
+    username = User.login;
     Base = (function() {
       __extends(_Class, Backbone.Collection);
       function _Class() {
