@@ -88,7 +88,6 @@ GH = ((gh) ->
 
 			pagecreate: =>
 				$.waitjax this.repos.fetch(), this.user.fetch(), =>
-					console.log this.repos
 					this.render()
 
 	gh.Views = new Views

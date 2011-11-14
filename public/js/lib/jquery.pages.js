@@ -11,20 +11,34 @@ var Pages = function(element, options) {
 
 };
 
+var old_page;
+
 $.extend(Pages.prototype, {
 
 	create: function(el) {
-		var old_page = this._pages.shift();
+		var old_page = this._pages.shift(),
+			left = $(window).width();
 		this._pages.push(el);
 		this.element.append(el);
 		el.css('position', 'absolute');
-		el.css('left', $(window).width() + 1000);
+		el.css('left', left);
 		el.width($(window).width());
-		el.animate({ left: 0 }, 900, 'easeOutQuad', function() {
-			if (old_page) {
-				old_page.remove();
-			}
+		el.css({
+			'-webkit-transition': '-webkit-transform 0.4s ease-in-out',
+    		'-webkit-transform': 'translateX(-' + left + 'px)'
 		});
+		if (old_page) {
+			old_page.css({
+				'-webkit-transition': '-webkit-transform 0.4s ease-in-out',
+	    		'-webkit-transform': 'translateX(-' + (left * 2) + 'px)'
+			});
+			(function(old) {
+				setTimeout(function() {
+					old.remove();	
+				}, 400);
+			})(old_page);
+		}
+		old_page = el;
 	}
 
 });

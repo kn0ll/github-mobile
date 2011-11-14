@@ -34,7 +34,6 @@
 
 	<ul class="repos">
 		<% repos.each(function(repo) {
-		console.log(repo);
 			var item_class = 'clearfix';
 			if (repo.get('private')) { item_class += ' private'; }
 			/* todo: figure out how to link to fork owner
