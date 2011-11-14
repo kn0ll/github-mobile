@@ -1,6 +1,6 @@
 GH = ((gh) ->
 
-	username = User.login
+	username = User.get 'login'
 
 	Base = class extends Backbone.Collection
 

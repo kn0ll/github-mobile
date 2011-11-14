@@ -27,7 +27,7 @@ $ ->
 			profile = new GH.Views.Profile
 				offset:  Nav.el.height()
 				username: username
-			if username is User.login
+			if username is User.get 'login'
 				Nav.selectByHref "/#{username}"
 			pages.create(profile.el) if pages
 

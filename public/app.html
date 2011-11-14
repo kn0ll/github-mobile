@@ -26,11 +26,6 @@
 	<div id="content">
 	</div>
 
-	<script>
-		var GH = {};
-		var User = <%= JSON.stringify(user) %>;
-	</script>
-
 	<!-- core deps -->
 	<script src="/js/lib/jquery-1.6.4.js"></script>
 	<script src="/js/lib/underscore-1.2.1.js"></script>
@@ -43,6 +38,11 @@
 	<!-- ui libs -->
 	<script src="/js/lib/jquery.scrollview.js"></script>
 	<script src="/js/lib/jquery.pages.js"></script>
+
+	<script>
+		var GH = {};
+		var User = new Backbone.Model(<%= JSON.stringify(user) %>);
+	</script>
 		
 	<script src="/js/models.js"></script>
 	<script src="/js/collections.js"></script>
