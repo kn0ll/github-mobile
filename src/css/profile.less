@@ -1,0 +1,62 @@
+.repos {
+	background: rgb(245, 245, 245);
+	padding: 8px;
+	list-style: none;
+	margin: 0;
+
+	> li {
+		line-height: 20px;
+		border: 1px solid rgb(213, 213, 213);
+		-webkit-border-radius: 4px;
+		background: #fff url(/img/public.png) no-repeat 8px center;
+		font-size: 14px;
+		font-weight: bold;
+		padding: 8px 8px 8px 29px;
+		margin-bottom: 8px;
+
+		&.fork {
+			background-image: url(/img/public-fork.png);
+		}
+
+		&.private {
+			background-image: url(/img/private.png);
+
+			&.fork {
+				background-image: url(/img/private-fork.png);
+			}
+		}
+
+		> h3 {
+			float: left;
+			margin: 0;
+		}
+
+		> .repo-stats {
+			float: right;
+			font-size: 11px;
+			color: #666;
+			padding: 0;
+			
+			> li {
+				float: left;
+				list-style: none;
+				margin: 0;
+				padding-left: 20px;
+
+				&.watchers,
+				&.forks {
+					padding-left: 18px;
+					margin-left: 9px;
+				}
+
+				&.watchers {
+					background: url(/img/repostat_watchers.png) no-repeat 0 -2px;
+				}
+
+				&.forks {
+					background: url(/img/repostat_forks.png) no-repeat 0 -2px;
+				}
+			}	
+		}
+	}
+}

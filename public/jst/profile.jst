@@ -17,8 +17,29 @@
 	</ul>
 
 	<ul class="repos">
-		<% repos.each(function(repo) { %>
-			<li><a href="/<%= user.get('login') %>/<%= repo.get('name') %>"><%= repo.get('name') %></a></li>
+		<% repos.each(function(repo) {
+		console.log(repo);
+			var item_class = 'clearfix';
+			if (repo.get('private')) {
+				item_class += ' private';
+			}
+			/* todo: figure out how to link to fork owner
+			if (repo.get('fork')) {
+				item_class += ' fork';
+			}
+			*/
+			item_class = jQuery.trim(item_class);
+		%>
+			<li class="<%= item_class %>">
+				<h3><a href="/<%= user.get('login') %>/<%= repo.get('name') %>"><%= repo.get('name') %></a></h3>
+				<ul class="repo-stats clearfix">
+					<% if (repo.get('language')) { %>
+						<li><%= repo.get('language') %></li>
+					<% } %>
+					<li class="watchers"><%= repo.get('watchers') %></li>
+					<li class="forks"><%= repo.get('forks') %></li>
+				</ul>
+			</li>
 		<% }); %>
 	</ul>
 
