@@ -12,8 +12,6 @@ var Waiter = function() {
 	var args = Array.prototype.slice.call(arguments),
 		cb = args.pop();
 
-	console.log(args);
-
 	$.when.apply(this, args).then(cb);
 
 };

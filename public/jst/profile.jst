@@ -16,4 +16,10 @@
 		<li><%= user.get('public_repos') %> repos</li>
 	</ul>
 
+	<ul class="repos">
+		<% repos.each(function(repo) { %>
+			<li><a href="/<%= user.get('login') %>/<%= repo.get('name') %>"><%= repo.get('name') %></a></li>
+		<% }); %>
+	</ul>
+
 </div>

@@ -1,8 +1,9 @@
 GH = ((gh) ->
 
-	username = User.get 'login'
-
 	Base = class extends Backbone.Collection
+
+		initialize: (models, options) ->
+			this.url = this.url options.user.get 'login'
 
 		sync: (method, model, options) ->
 			options.dataType = 'jsonp'
@@ -14,16 +15,16 @@ GH = ((gh) ->
 	Collections = class
 
 		News: class extends Base
-			url: "/users/#{username}/received_events/public"
+			url: (login) -> "/users/#{login}/received_events/public"
 			
 		Events: class extends Base
-			url: "/users/#{username}/events"
+			url: (login) -> "/users/#{login}/events"
 
 		Repos: class extends Base
-			url: "/users/#{username}/repos"
+			url: (login) -> "/users/#{login}/repos"
 
 		Watched: class extends Base
-			url: "/users/#{username}/watched"
+			url: (login) -> "/users/#{login}/watched"
 
 	gh.Collections = new Collections
 	gh

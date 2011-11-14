@@ -9,15 +9,9 @@ var Pages = function(element, options) {
 	this.options = $.extend({
 	}, options);
 
-	this._create();
-
 };
 
 $.extend(Pages.prototype, {
-
-	_create: function() {
-		console.log('creating pages controller for', $(this.element));
-	},
 
 	create: function(el) {
 		var old_page = this._pages.shift();

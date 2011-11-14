@@ -66,9 +66,14 @@ GH = ((gh) ->
 
 			template: '/jst/events.jst'
 
+			initialize: (options) ->
+				this.collection = new gh.Collections.News null,
+					user: User
+				PageView.prototype.initialize.call this, options
+
 			pagecreate: ->
-				this.collection = new gh.Collections.News
-				this.collection.fetch success: this.render
+				$.waitjax this.collection.fetch(), =>
+					this.render()
 
 		Profile: class extends PageView
 
@@ -77,10 +82,13 @@ GH = ((gh) ->
 			initialize: (options) ->
 				this.user = new GH.Models.User
 					login: options.username
+				this.repos = new GH.Collections.Repos null,
+					user: this.user
 				PageView.prototype.initialize.call this, options
 
 			pagecreate: =>
-				$.waitjax this.user.fetch(), =>
+				$.waitjax this.repos.fetch(), this.user.fetch(), =>
+					console.log this.repos
 					this.render()
 
 	gh.Views = new Views
