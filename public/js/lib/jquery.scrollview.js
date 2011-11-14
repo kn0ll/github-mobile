@@ -759,6 +759,10 @@ $.fn.scrollview = function(options) {
 		$ps.height(window.innerHeight - options.offset);	
 	}
 
+	if (!$.support.touch) {
+		return false;
+	}
+
 	$body.css('overflow', 'hidden');
 	$body.bind('touchmove', function (e) {
 		scrollview = e.preventDefault();
