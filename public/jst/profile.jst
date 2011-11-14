@@ -1,20 +1,36 @@
 <div class="profile">
 
-	<h1><%= user.get('login') %></h1>
-	
-	<ul class="info">
-		<li>Name: <%= user.get('name') %></li>
-		<li>Email: <%= user.get('email') %></li>
-		<li>Company: <%= user.get('company') %></li>
-		<li>Location: <%= user.get('location') %></li>
-		<li>Member Since: <%= user.get('created_at') %></li>
-	</ul>
+	<div class="info">
 
-	<ul class="stats">
-		<li><%= user.get('followers') %> followers</li>
-		<li><%= user.get('public_gists') %> gists</li>
-		<li><%= user.get('public_repos') %> repos</li>
-	</ul>
+		<h1><%= user.get('login') %></h1>
+
+		<div class="stats clearfix">
+
+			<div class="gravatar">
+				<img src="https://secure.gravatar.com/avatar/<%= user.get('gravatar_id') %>" />
+			</div>
+
+			<ul class="clearfix">
+				<li><strong><%= user.get('public_repos') %></strong>repos</li>
+				<li><strong><%= user.get('followers') %></strong>followers</li>
+			</ul>
+
+		</div>
+		
+		<ul class="about">
+			<li>Name: <%= user.get('name') %></li>
+			<li>Email: <%= user.get('email') %></li>
+			<li>Company: <%= user.get('company') %></li>
+			<li>Location: <%= user.get('location') %></li>
+			<li>Member Since: <%= user.get('created_at') %></li>
+		</ul>
+
+		<ul class="tabs">
+			<li><a href="#" class="active">Repos</a></li>
+			<li><a href="#">Activity</a></li>
+		</ul>
+
+	</div>
 
 	<ul class="repos">
 		<% repos.each(function(repo) {
@@ -28,11 +44,11 @@
 			<li class="<%= item_class %>">
 				<h3><a href="/<%= user.get('login') %>/<%= repo.get('name') %>"><%= repo.get('name') %></a></h3>
 				<ul class="repo-stats clearfix">
+					<li class="forks"><%= repo.get('forks') %></li>
+					<li class="watchers"><%= repo.get('watchers') %></li>
 					<% if (repo.get('language')) { %>
 						<li><%= repo.get('language') %></li>
 					<% } %>
-					<li class="watchers"><%= repo.get('watchers') %></li>
-					<li class="forks"><%= repo.get('forks') %></li>
 				</ul>
 			</li>
 		<% }); %>

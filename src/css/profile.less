@@ -1,62 +1,156 @@
-.repos {
-	background: rgb(245, 245, 245);
-	padding: 8px;
-	list-style: none;
-	margin: 0;
+.profile {
+	
+	.info {
+		background: rgb(229, 229, 229);
+		padding: 10px 10px 0;
 
-	> li {
-		line-height: 20px;
-		border: 1px solid rgb(213, 213, 213);
-		-webkit-border-radius: 4px;
-		background: #fff url(/img/public.png) no-repeat 8px center;
-		font-size: 14px;
-		font-weight: bold;
-		padding: 8px 8px 8px 29px;
-		margin-bottom: 8px;
-
-		&.fork {
-			background-image: url(/img/public-fork.png);
+		h1 {
+			margin: 0 0 10px;	
+			letter-spacing: -1px;
+			text-shadow: 1px 1px 0 white;
+			color: #495961;
+			line-height: 20px;
 		}
 
-		&.private {
-			background-image: url(/img/private.png);
+		.stats {
+			margin-bottom: 10px;
 
-			&.fork {
-				background-image: url(/img/private-fork.png);
+			.gravatar {
+				padding: 2px;
+				float: left;
+				margin-right: 15px;
+				border: 1px solid #d0d0d0;
+				background: #fff;
+				display: inline-block;
+				line-height: 0;
+
+				img {
+					height: 48px;
+					width: 48px;
+				}
+			}
+			
+			> ul {
+				padding: 1px 0 0;
+				margin: 10px 0 0;
+				list-style: none;
+				float: left;
+
+				> li {
+					float: left;
+					margin-right: 15px;
+					color: #666;
+					font-size: 12px;
+					line-height: 18px;
+
+					strong {
+						color: #000;
+						display: block;
+						font-size: 26px;
+					}
+				}
 			}
 		}
 
-		> h3 {
-			float: left;
-			margin: 0;
-		}
-
-		> .repo-stats {
-			float: right;
-			font-size: 11px;
-			color: #666;
+		.tabs {
+			border-bottom: 1px solid #ddd;
 			padding: 0;
+			margin: 0;
+
+			li {
+				display: inline-block;
+				cursor: pointer;
+			}
 			
-			> li {
+			a {
+				color: #666;
+				padding: 8px 12px;
+				display: inline-block;
+				margin-bottom: -1px;
+
+				&.active {
+					color: #333;
+					font-weight: bold;
+					border-left: 1px solid #ddd;
+					border-top: 1px solid #ddd;
+					border-right: 1px solid #ddd;
+					-webkit-border-radius: 3px 3px 0 0;
+					background: #fff;
+				}
+			}
+		}
+	}
+
+	.about {
+		display: none;
+		margin-bottom: 10px;
+	}
+
+	.repos {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		> li {
+			line-height: 20px;
+			border-bottom: 1px solid rgb(213, 213, 213);
+			-webkit-border-radius: 4px;
+			background: #fff url(/img/public.png) no-repeat 8px center;
+			font-size: 14px;
+			font-weight: bold;
+			padding: 10px 10px 10px 31px;
+
+			&.fork {
+				background-image: url(/img/public-fork.png);
+			}
+
+			&.private {
+				background-image: url(/img/private.png);
+
+				&.fork {
+					background-image: url(/img/private-fork.png);
+				}
+			}
+
+			> h3 {
 				float: left;
-				list-style: none;
 				margin: 0;
-				padding-left: 20px;
+				width: 40%;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				color: #4183c4;
+			}
 
-				&.watchers,
-				&.forks {
-					padding-left: 18px;
-					margin-left: 9px;
-				}
+			> .repo-stats {
+				float: right;
+				font-size: 11px;
+				color: #666;
+				padding: 0;
+				width: 60%;
+				
+				> li {
+					float: right;
+					list-style: none;
+					margin: 0;
+					padding-left: 20px;
 
-				&.watchers {
-					background: url(/img/repostat_watchers.png) no-repeat 0 -2px;
-				}
+					&.watchers,
+					&.forks {
+						padding-left: 18px;
+					}
 
-				&.forks {
-					background: url(/img/repostat_forks.png) no-repeat 0 -2px;
-				}
-			}	
+					&.watchers {
+						background: url(/img/repostat_watchers.png) no-repeat 0 -2px;
+						margin-left: 5px;
+					}
+
+					&.forks {
+						background: url(/img/repostat_forks.png) no-repeat 0 -2px;
+						margin-left: 2px;
+					}
+				}	
+			}
 		}
 	}
 }
