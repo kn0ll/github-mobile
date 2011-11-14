@@ -3,14 +3,12 @@ GH = ((gh) ->
 	PageView = class extends Backbone.View
 
 		tagName: 'div'
-		className: 'page'
-		
-		offset: 0		  # height offset of els outside the scrollview
+		className: 'loading page'
 
-		events:
-			'pagecreate': 'pagecreate' # triggered then the dom element is created
+		# height offset to subtract from window height
+		offset: 0
 
-		# set options and create element
+		# save options and init el creation
 		initialize: (options) ->
 			_.bindAll this
 			_.extend this, options
@@ -19,11 +17,10 @@ GH = ((gh) ->
 		# create el in loading state
 		build: ->
 			this.el = $(this.make this.tagName, class: this.className)
-			this.el.addClass 'loading'
-			# initiate scrollview
-			GH.Widgets.Scrollview this.el, this.offset
 			# notify widget was created
 			this.pagecreate()
+			# scrollview-ify
+			this.el.scrollview direction: 'y', offset: this.offset
 		
 		# individual views should override this to decide how to load content
 		pagecreate: ->

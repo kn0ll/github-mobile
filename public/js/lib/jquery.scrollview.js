@@ -750,9 +750,29 @@ $.support.touch = "ontouchend" in document;
 // returns the el instead of scrollview for normal chaining
 // stores the scrollview on the element data for future reference 
 $.fn.scrollview = function(options) {
-	return this.data({
-		scrollview: new Scrollview(this, options)
+
+	var $body = $('body'),
+		$ps = $(this),
+		scrollview;
+
+	function resize_scrollview() {
+		$ps.height(window.innerHeight - options.offset);	
+	}
+
+	$body.css('overflow', 'hidden');
+	$body.bind('touchmove', function (e) {
+		scrollview = e.preventDefault();
 	});
+
+	$ps.one('modified.scrollview', function() {
+		scrollview = new Scrollview($ps, options)
+	});
+
+	$ps.bind('modified.scrollview', resize_scrollview);
+	$ps.bind('orientationchange', resize_scrollview);
+	
+	return this;
+
 }
 
 })(jQuery,window,document); // End Component
