@@ -84,11 +84,21 @@ GH = ((gh) ->
 					login: options.username
 				this.repos = new GH.Collections.Repos null,
 					user: this.user
+				this.collection = new gh.Collections.Events null,
+					user: this.user
 				PageView.prototype.initialize.call this, options
 
 			pagecreate: =>
-				$.waitjax this.repos.fetch(), this.user.fetch(), =>
-					this.render()
+				ops = []
+				ops.push this.user.fetch()
+				ops.push this.repos.fetch()
+				# todo: should be named other than collection
+				ops.push this.collection.fetch()
+				ops.push =>
+					$.get '/jst/events.jst', (tmp) =>
+						this.events_html = _.template(tmp, this)
+						this.render()
+				$.waitjax.apply null, ops
 
 	gh.Views = new Views
 	gh

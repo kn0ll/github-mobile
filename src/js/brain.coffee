@@ -41,5 +41,7 @@ $ ->
 	$ ->
 
 		$('a').live 'click', (e) ->
-			router.navigate $(this).attr('href'), true
-			e.preventDefault()
+			href = $(this).attr('href')
+			if href
+				router.navigate $(this).attr('href'), true
+				e.preventDefault()

@@ -18,7 +18,7 @@ GH = ((gh) ->
 			url: (login) -> "/users/#{login}/received_events/public"
 			
 		Events: class extends Base
-			url: (login) -> "/users/#{login}/events"
+			url: (login) -> "/users/#{login}/events/public"
 
 		Repos: class extends Base
 			url: (login) -> "/users/#{login}/repos"

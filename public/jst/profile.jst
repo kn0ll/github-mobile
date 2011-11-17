@@ -26,31 +26,37 @@
 		</ul>
 
 		<ul class="tabs">
-			<li><a href="#" class="active">Repos</a></li>
-			<li><a href="#">Activity</a></li>
+			<li><a data-tab="repos" class="active">Repos</a></li>
+			<li><a data-tab="events">Activity</a></li>
 		</ul>
 
 	</div>
 
-	<ul class="repos">
-		<% repos.each(function(repo) {
-			var item_class = 'clearfix';
-			if (repo.get('private')) { item_class += ' private'; }
-			/* todo: figure out how to link to fork owner
-			if (repo.get('fork')) { item_class += ' fork'; } */
-			item_class = jQuery.trim(item_class);
-		%>
-			<li class="<%= item_class %>">
-				<h3><a href="/<%= user.get('login') %>/<%= repo.get('name') %>"><%= repo.get('name') %></a></h3>
-				<ul class="repo-stats clearfix">
-					<li class="forks"><%= repo.get('forks') %></li>
-					<li class="watchers"><%= repo.get('watchers') %></li>
-					<% if (repo.get('language')) { %>
-						<li><%= repo.get('language') %></li>
-					<% } %>
-				</ul>
-			</li>
-		<% }); %>
-	</ul>
+	<div class="tab-sections">
+
+		<ul class="repos" style="display: block;">
+			<% repos.each(function(repo) {
+				var item_class = 'clearfix';
+				if (repo.get('private')) { item_class += ' private'; }
+				/* todo: figure out how to link to fork owner
+				if (repo.get('fork')) { item_class += ' fork'; } */
+				item_class = jQuery.trim(item_class);
+			%>
+				<li class="<%= item_class %>">
+					<h3><a href="/<%= user.get('login') %>/<%= repo.get('name') %>"><%= repo.get('name') %></a></h3>
+					<ul class="repo-stats clearfix">
+						<li class="forks"><%= repo.get('forks') %></li>
+						<li class="watchers"><%= repo.get('watchers') %></li>
+						<% if (repo.get('language')) { %>
+							<li><%= repo.get('language') %></li>
+						<% } %>
+					</ul>
+				</li>
+			<% }); %>
+		</ul>
+
+		<%= events_html %>
+
+	</div>
 
 </div>

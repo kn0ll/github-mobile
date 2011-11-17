@@ -1,6 +1,6 @@
 <%
 function escapeHTML(text) {
-    return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    return text? text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'): false;
 }
 %>
 
@@ -49,9 +49,9 @@ if (type == 'IssuesEvent') {
  ########   ########  ###       ### ###       ### ########## ###    ####     ###    
 */
 } else if (type == 'IssueCommentEvent') {
-	var type_type = p.issue.pull_request.diff_url? 'pull request': 'issue',
-		number = p.issue.number,
-		details = p.comment.body;
+	var type_type = p.issue && p.issue.pull_request.diff_url? 'pull request': 'issue',
+		number = p.issue && p.issue.number,
+		details = p.comment && p.comment.body;
 %>
 <li>
 	<span class="title"><a href="/<%= username %>"><%= username %></a> <span>commented</span> on <a href="#"><%= type_type %> <%= number %></a> on <a href="#"><%= name %></a> <%= date %></span>
