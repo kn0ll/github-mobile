@@ -7,7 +7,7 @@ function escapeHTML(text) {
 <ul class="events">
 
 <%
-collection.each(function(model) {
+actions.each(function(model) {
 	var type = model.get('type'),
 		p = model.get('payload'),
 		a = model.get('actor'),

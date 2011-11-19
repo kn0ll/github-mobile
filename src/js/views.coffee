@@ -12,21 +12,21 @@ GH = ((gh) ->
 		initialize: (options) ->
 			_.bindAll this
 			_.extend this, options
-			this.build()
+			@build()
 			
 		# create el in loading state
 		build: ->
-			this.el = $(this.make this.tagName, class: this.className)
+			@el = $(@make @tagName, class: @className)
 			# notify widget was created
-			this.pagecreate()
+			@pagecreate()
 			# scrollview-ify
-			this.el.scrollview direction: 'y', offset: this.offset
+			@el.scrollview direction: 'y', offset: @offset
 		
 		# individual views should override this to decide how to load content
 		pagecreate: ->
 		
-		# default view render empties and re-populates this.el
-		render: ->
+		# default view render empties and re-populates @el
+		render: (cb) ->
 			self = this
 			$.get self.template, (tmp) =>
 				self.el.empty()
@@ -34,6 +34,8 @@ GH = ((gh) ->
 				self.el.removeClass 'loading'
 				# notify scrollview of content change
 				self.el.trigger 'modified'
+				@delegateEvents()
+				cb() if cb
 		
 	Views = class
 
@@ -45,17 +47,17 @@ GH = ((gh) ->
 			initialize: ->
 				self = this
 				_.bindAll this
-				this.model = new Backbone.Model
+				@model = new Backbone.Model
 					$selected: $ '.selected', self.el
-				this.model.bind 'change:$selected', this.render
+				@model.bind 'change:$selected', @render
 
 			select: (e) ->
-				this.model.set
+				@model.set
 					$selected: $(e.target).closest 'a'
 
 			selectByHref: (href) ->
-				this.model.set
-					$selected: $ "a[href='#{href}']", this.el
+				@model.set
+					$selected: $ "a[href='#{href}']", @el
 
 			render: (model, $selected) ->
 				$prev = model.previous '$selected'
@@ -67,38 +69,54 @@ GH = ((gh) ->
 			template: '/jst/events.jst'
 
 			initialize: (options) ->
-				this.collection = new gh.Collections.News null,
-					user: User
+				@user = options.user || new GH.Models.User
+					login: options.username
+				@actions = new gh.Collections.News null,
+					user: @user
 				PageView.prototype.initialize.call this, options
 
 			pagecreate: ->
-				$.waitjax this.collection.fetch(), =>
-					this.render()
+				$.waitjax @actions.fetch(), =>
+					@render()
 
 		Profile: class extends PageView
 
 			template: '/jst/profile.jst'
 
+			events:
+				'click .tabs a': 'selectTab'
+
 			initialize: (options) ->
-				this.user = new GH.Models.User
+				@user = options.user || new GH.Models.User
 					login: options.username
-				this.repos = new GH.Collections.Repos null,
-					user: this.user
-				this.collection = new gh.Collections.Events null,
-					user: this.user
+				@repos = new GH.Collections.Repos null,
+					user: @user
+				@actions = new gh.Collections.Actions null,
+					user: @user
 				PageView.prototype.initialize.call this, options
 
 			pagecreate: =>
 				ops = []
-				ops.push this.user.fetch()
-				ops.push this.repos.fetch()
-				# todo: should be named other than collection
-				ops.push this.collection.fetch()
+				ops.push @user.fetch()
+				ops.push @repos.fetch()
+				ops.push @actions.fetch()
 				ops.push =>
 					$.get '/jst/events.jst', (tmp) =>
-						this.events_html = _.template(tmp, this)
-						this.render()
+						@events_html = _.template(tmp, this)
+						@render =>
+							@$a = $ '.tabs a', @el
+							@$tabs = $ '.tab-sections > *', @el
 				$.waitjax.apply null, ops
+
+			selectTab: (e) =>
+				$a = $ e.target
+				tab_name = $a.data 'tab'
+				$tab = @$tabs.filter ".#{tab_name}"
+				@$a.removeClass 'active' if @$a
+				$a.addClass 'active'
+				@$a = $a
+				@$tabs.hide()
+				$tab.show()
 
 	gh.Views = new Views
 	gh

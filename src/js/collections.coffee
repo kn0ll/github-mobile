@@ -17,7 +17,7 @@ GH = ((gh) ->
 		News: class extends Base
 			url: (login) -> "/users/#{login}/received_events/public"
 			
-		Events: class extends Base
+		Actions: class extends Base
 			url: (login) -> "/users/#{login}/events/public"
 
 		Repos: class extends Base

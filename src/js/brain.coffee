@@ -20,6 +20,7 @@ $ ->
 		news: ->
 			news = new GH.Views.News
 				offset:  Nav.el.height()
+				user: User
 			Nav.selectByHref '/news'
 			pages.create(news.el) if pages
 		
