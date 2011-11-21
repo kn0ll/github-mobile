@@ -2,3 +2,6 @@ node_modules
 .DS_Store
 public/js
 public/css
+keys.coffee
+keys.js
+app.js

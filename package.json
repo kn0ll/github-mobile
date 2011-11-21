@@ -1,12 +1,16 @@
 {
-    "name": "github-mobile",
-    "version": "0.0.1",
-    "dependencies": {
-        "coffee-script": "1.1.x",
-        "connect": "1.7.x",
-        "connect-auth": "0.4.x",
-        "jquery": "1.6.x",
-        "less": "1.1.x",
-        "underscore": "1.2.x"
-    }
+  "name": "github-mobile",
+  "version": "0.0.1-4",
+  "dependencies": {
+    "coffee-script": "1.1.x",
+    "connect": "1.7.x",
+    "connect-auth": "0.4.x",
+    "jquery": "1.6.x",
+    "less": "1.1.x",
+    "underscore": "1.2.x"
+  },
+  "subdomain": "gh",
+  "scripts": {
+    "start": "app.js"
+  }
 }
