@@ -1,6 +1,6 @@
 {
   "name": "github-mobile",
-  "version": "0.0.1-4",
+  "version": "0.0.1-7",
   "dependencies": {
     "coffee-script": "1.1.x",
     "connect": "1.7.x",
@@ -11,6 +11,6 @@
   },
   "subdomain": "gh",
   "scripts": {
-    "start": "app.js"
+    "start": "app.coffee"
   }
 }
