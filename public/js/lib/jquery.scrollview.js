@@ -756,7 +756,7 @@ $.fn.scrollview = function(options) {
 		scrollview;
 
 	function resize_scrollview() {
-		$ps.height(window.innerHeight - options.offset);	
+		$ps.height(window.innerHeight);	
 	}
 
 	if (!$.support.touch) {

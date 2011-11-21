@@ -3,6 +3,8 @@ fs = require 'fs'
 connect = require 'connect'
 auth = require 'connect-auth'
 _ = require 'underscore'
+https = require 'https'
+$ = require 'jquery'
 
 # stuff
 view = _.template fs.readFileSync __dirname + '/public/app.html', 'utf8'
@@ -15,6 +17,10 @@ connect_server.use connect.session secret: 'lol'
 compile_opts = enable: ['coffeescript', 'less'], src: './src', dest: './public'
 connect_server.use connect.compiler compile_opts
 connect_server.use connect.static __dirname + '/public'
+connect_server.use connect.query()
+
+# simple readme cache
+readmes = {}
 
 # github auth
 connect_server.use auth strategies: [auth.Github require './keys']
@@ -42,6 +48,32 @@ connect_server.use connect.router (app) ->
 	# logout
 	app.get '/logout', (req, res, next) ->
 		req.logout()
+
+	# hacky api to get readme html
+	app.get '/api/repos/:username/:repo/readme', (req, res, next) ->
+		cb = req.query.callback
+		username = req.params.username
+		repo = req.params.repo
+		name = "/#{username}/#{repo}"
+		fin = (html) ->
+			js = JSON.stringify
+				html: html
+			res.end "#{cb}(#{js});"
+		res.writeHead 200, 'Content-Type': 'application/json'
+		if readmes[name]
+			fin readmes[name]
+		else
+			opts =
+				host: 'github.com'
+				path:name
+			api_req = https.request opts, (resp) ->
+				body = ''
+				resp.on 'data', (chunk) ->
+					body += chunk
+				resp.on 'end', ->
+					readmes[name] = $('#readme .wikistyle', body).html()
+					fin readmes[name]
+			api_req.end()
 
 	# main page
 	app.get '/', (req, res, next) ->

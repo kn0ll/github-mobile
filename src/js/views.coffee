@@ -5,9 +5,6 @@ GH = ((gh) ->
 		tagName: 'div'
 		className: 'loading page'
 
-		# height offset to subtract from window height
-		offset: 0
-
 		# save options and init el creation
 		initialize: (options) ->
 			_.bindAll this
@@ -20,7 +17,7 @@ GH = ((gh) ->
 			# notify widget was created
 			@pagecreate()
 			# scrollview-ify
-			@el.scrollview direction: 'y', offset: @offset
+			@el.scrollview direction: 'y'
 		
 		# individual views should override this to decide how to load content
 		pagecreate: ->
@@ -78,6 +75,27 @@ GH = ((gh) ->
 			pagecreate: ->
 				$.waitjax @actions.fetch(), =>
 					@render()
+
+		Repo: class extends PageView
+
+			template: '/jst/repo.jst'
+
+			initialize: (options) ->
+				@repo = options.repo || new GH.Models.Repo
+					name: options.name
+				@readme = new GH.Models.Readme
+					repo: @repo
+				PageView.prototype.initialize.call this, options
+
+			pagecreate: ->
+				ops = []
+				ops.push @repo.fetch()
+				ops.push @readme.fetch()
+				ops.push =>
+					console.log @readme
+					@render()
+				$.waitjax.apply null, ops
+					
 
 		Profile: class extends PageView
 

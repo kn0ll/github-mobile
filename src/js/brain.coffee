@@ -12,28 +12,28 @@ $ ->
 			'/': 'index'
 			'/news': 'news'
 			'/:username': 'profile'
-			'/:username/:repository': 'repository'
+			'/:username/:repository': 'repo'
 
 		index: ->
 			console.log 'routed: index'
 		
 		news: ->
 			news = new GH.Views.News
-				offset:  Nav.el.height()
 				user: User
 			Nav.selectByHref '/news'
 			pages.create(news.el) if pages
 		
-		profile: (username, repository) ->
+		profile: (username) ->
 			profile = new GH.Views.Profile
-				offset:  Nav.el.height()
 				username: username
 			if username is User.get 'login'
 				Nav.selectByHref "/#{username}"
 			pages.create(profile.el) if pages
 
-		repository: ->
-			console.log 'routed: repository'
+		repo: (username, repository) ->
+			repo = new GH.Views.Repo
+				name: "#{username}/#{repository}"
+			pages.create(repo.el) if pages
 
 	router = new Router
 

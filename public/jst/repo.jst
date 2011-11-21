@@ -1,0 +1,41 @@
+<div class="repository">
+
+	<div class="info">
+
+		<h1><%= repo.get('name') %></h1>
+
+		<%
+			var description = repo.get('description'),
+				homepage = repo.get('homepage'); 
+		%>
+
+		<% if (description || homepage) { %>
+			<div class="description">
+				<% if (description) { %>
+					<p><%= description %></p>
+				<% } %>
+				<% if (homepage) { %>
+					<p><a href="<%= homepage %>"><%= homepage %></a></p>
+				<% } %>
+			</div>
+		<% } %>
+
+		<ul class="tabs">
+			<% if (readme.get('html')) { %>
+				<li><a data-tab="readme" class="active">Readme</a></li>
+			<% } %>
+		</ul>
+
+	</div>
+
+	<div class="tab-sections">
+
+		<% if (readme.get('html')) { %>
+			<div class="readme" style="display: block;">
+				<%= readme.get('html') %>
+			</div>
+		<% } %>
+
+	</div>
+
+</div>
