@@ -8,8 +8,8 @@ $ ->
 	Router = class extends Backbone.Router
 
 		routes:
-			'': 'index'
-			'/': 'index'
+			'': 'news'
+			'/': 'news'
 			'/news': 'news'
 			'/:username': 'profile'
 			'/:username/:repository': 'repo'

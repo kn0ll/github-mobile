@@ -71,7 +71,7 @@ connect_server.use connect.router (app) ->
 				resp.on 'data', (chunk) ->
 					body += chunk
 				resp.on 'end', ->
-					readmes[name] = $('#readme .wikistyle', body).html()
+					readmes[name] = $('#readme', body).html()
 					fin readmes[name]
 			api_req.end()
 
