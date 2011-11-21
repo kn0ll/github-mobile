@@ -3,5 +3,3 @@ node_modules
 public/js
 public/css
 keys.coffee
-keys.js
-app.js
