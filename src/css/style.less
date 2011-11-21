@@ -9,44 +9,32 @@ body {
 	}
 
 	* {
-		-webkit-tap-highlight-color: rgba(0,0,0,0);
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 	} 
-}
 
-.page.loading {
-	background: transparent url(/img/loader.gif) no-repeat center 50px;
-	height: 90px;
-}
+	.page {
+		background: #fff;
+		min-height: 100%;
 
-#content {
-	position: absolute;
-	z-index: 1;
-	top: 39px;
-	left: 0;
-	width: 100%;
-}
-
-.page {
-	background: #fff;
-}
-
-#content,
-.page {
-	min-height: 100%;
-}
-
-.clearfix:before,
-.clearfix:after {
-	content: "\0020";
-	display: block;
-	height: 0;
-	overflow: hidden;
-}
-
-.clearfix:after {
-	clear: both;
+		&.loading {
+			background: transparent url(/img/loader.gif) no-repeat center 50px;
+			height: 90px;
+		}
+	}
 }
 
 .clearfix {
 	zoom: 1;
+
+	&:before,
+	&:after {
+		content: "\0020";
+		display: block;
+		height: 0;
+		overflow: hidden;
+	}
+
+	&:after {
+		clear: both;
+	}
 }
