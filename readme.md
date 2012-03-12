@@ -13,6 +13,7 @@ installation
 
     $ git clone git@github.com:catshirt/github-mobile.git
     $ cd github-mobile
+    $ npm install
     $ coffee app.coffee
 
 will start a server running on [localhost:8000](http://localhost:8000).
