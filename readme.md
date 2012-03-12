@@ -3,7 +3,7 @@ github-mobile
 
 intention
 ---
-github-mobile is a github web app most suitable for mobile browsing.
+github-mobile is a github web app most suitable for mobile browsing. you can view a [live demo here](http://gh.nodejitsu.com/).
 
 ![screenshot 1](http://i.imgur.com/3ny4U.png) | 
 ![screenshot 2](http://i.imgur.com/xPabC.png)
