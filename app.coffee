@@ -66,13 +66,13 @@ connect_server.use connect.router (app) ->
 		else
 			opts =
 				host: 'github.com'
-				path:name
+				path: name
 			api_req = https.request opts, (resp) ->
 				body = ''
 				resp.on 'data', (chunk) ->
 					body += chunk
 				resp.on 'end', ->
-					$ = cheerio.load html
+					$ = cheerio.load body
 					readmes[name] = $('#readme').text()
 					fin readmes[name]
 			api_req.end()
