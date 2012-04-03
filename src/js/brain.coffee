@@ -36,11 +36,9 @@ $ ->
 	Backbone.history.start()
 
 	# b2g install
-	# if navigator.mozApps
-	manifest = 'http://gh.nodejitsu.com/manifest.json'
-	if confirm 'Wow! You\'re totally on B2G!! Install this one your home screen?'
-		alert 'Thanks!!'
-		# navigator.mozApps.install manifest
+	if navigator.mozApps
+		if confirm 'Wow! You\'re totally on B2G!! Install this one your home screen?'
+			navigator.mozApps.install 'http://gh.nodejitsu.com/manifest.json'
 
 	# all anchors are routes
 	$ ->
