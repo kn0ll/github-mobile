@@ -25,12 +25,16 @@ $.extend(Pages.prototype, {
 		el.width($(window).width());
 		el.css({
 			'-webkit-transition': '-webkit-transform 0.4s ease-in-out',
-    		'-webkit-transform': 'translateX(-' + left + 'px)'
+    		'-webkit-transform': 'translateX(-' + left + 'px)',
+    		'-moz-transition': '-moz-transform 0.4s ease-in-out',
+    		'-moz-transform': 'translate(-' + left + 'px)'
 		});
 		if (old_page) {
 			old_page.css({
 				'-webkit-transition': '-webkit-transform 0.4s ease-in-out',
-	    		'-webkit-transform': 'translateX(-' + (left * 2) + 'px)'
+	    		'-webkit-transform': 'translateX(-' + (left * 2) + 'px)',
+				'-moz-transition': '-webkit-transform 0.4s ease-in-out',
+	    		'-moz-transform': 'translate(-' + (left * 2) + 'px)'
 			});
 			(function(old) {
 				setTimeout(function() {
