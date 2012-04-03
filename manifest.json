@@ -7,7 +7,6 @@
 	},
 	"description": "GitHub site suitable for mobile browsing",
 	"launch_path": "/",
-	"subdomain": "gh",
 	"developer": {
 		"url": "https://github.com/catshirt/github-mobile",
 		"name": "catshirt"
