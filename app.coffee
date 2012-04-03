@@ -8,6 +8,7 @@ cheerio = require 'cheerio'
 
 # stuff
 view = _.template fs.readFileSync __dirname + '/public/app.html', 'utf8'
+manifest = fs.readFileSync __dirname + '/manifest.json', 'utf8'
 connect_server = connect.createServer()
 connect_server.use connect.cookieParser()
 connect_server.use connect.bodyParser()
@@ -84,6 +85,11 @@ connect_server.use connect.router (app) ->
 		else
 			res.writeHead 303, Location: '/login'
 			res.end()
+
+	# manifest.json for b2g
+	app.get '/manifest.json', (req, res, next) ->
+		res.writeHead 200, 'Content-Type': 'text/html'
+		res.end manifest
 	
 # start server
 connect_server.listen 8000
