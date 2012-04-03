@@ -4,7 +4,7 @@ connect = require 'connect'
 auth = require 'connect-auth'
 _ = require 'underscore'
 https = require 'https'
-$ = require 'jquery'
+cheerio = require 'cheerio'
 
 # stuff
 view = _.template fs.readFileSync __dirname + '/public/app.html', 'utf8'
@@ -71,7 +71,8 @@ connect_server.use connect.router (app) ->
 				resp.on 'data', (chunk) ->
 					body += chunk
 				resp.on 'end', ->
-					readmes[name] = $('#readme', body).html()
+					$ = cheerio.load html
+					readmes[name] = $('#readme').text()
 					fin readmes[name]
 			api_req.end()
 
