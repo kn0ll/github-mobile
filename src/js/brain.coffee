@@ -13,9 +13,6 @@ $ ->
 			'/news': 'news'
 			'/:username': 'profile'
 			'/:username/:repository': 'repo'
-
-		index: ->
-			console.log 'routed: index'
 		
 		news: ->
 			news = new GH.Views.News
