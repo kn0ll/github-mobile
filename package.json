@@ -1,13 +1,19 @@
 {
-	"name": "github-mobile",
-	"version": "0.0.1-12",
-	"dependencies": {
-		"cheerio": "0.6.2",
-		"coffee-script": "1.1.x",
-		"connect": "1.7.x",
-		"connect-auth": "0.4.x",
-		"less": "1.1.x",
-		"underscore": "1.2.x"
-	},
-	"subdomain": "gh"
+  "name": "github-mobile",
+  "version": "0.0.1-13",
+  "dependencies": {
+    "cheerio": "0.6.2",
+    "coffee-script": "1.1.x",
+    "connect": "1.7.x",
+    "connect-auth": "0.4.x",
+    "less": "1.1.x",
+    "underscore": "1.2.x"
+  },
+  "subdomain": "gh",
+  "scripts": {
+    "start": "app.coffee"
+  },
+  "engines": {
+    "node": "0.6.x"
+  }
 }
