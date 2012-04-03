@@ -1,0 +1,14 @@
+
+{
+	"name": "GitHub",
+	"default_locale": "en-US",
+	"icons": {
+		"120": "/img/octocat-90.png"
+	},
+	"description": "GitHub site suitable for mobile browsing",
+	"launch_path": "/",
+	"developer": {
+		"url": "https://github.com/catshirt/github-mobile",
+		"name": "catshirt"
+	}
+}
