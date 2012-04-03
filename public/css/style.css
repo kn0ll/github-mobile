@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  font: 13.34px helvetica, arial, freesans, clean, sans-serif;
+  line-height: 1.4;
+}
+body a {
+  color: #4183c4;
+  text-decoration: none;
+}
+body * {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+body #content {
+  padding-top: 39px;
+}
+body .page {
+  background: #fff;
+  min-height: 100%;
+}
+body .page.loading {
+  background: transparent url(/img/loader.gif) no-repeat center 50px;
+  height: 90px;
+}
+.clearfix {
+  zoom: 1;
+}
+.clearfix:before, .clearfix:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.clearfix:after {
+  clear: both;
+}

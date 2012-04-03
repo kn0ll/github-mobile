@@ -1,0 +1,184 @@
+.profile .info, .repository .info {
+  background: #e5e5e5;
+  padding: 10px 10px 0;
+}
+.profile .info h1, .repository .info h1 {
+  margin: 0 0 10px;
+  letter-spacing: -1px;
+  text-shadow: 1px 1px 0 white;
+  color: #495961;
+  line-height: 20px;
+}
+.profile .info p, .repository .info p {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.profile .info .description, .repository .info .description {
+  margin-bottom: 10px;
+}
+.profile .info .stats, .repository .info .stats {
+  margin-bottom: 10px;
+}
+.profile .info .stats .gravatar, .repository .info .stats .gravatar {
+  padding: 2px;
+  float: left;
+  margin-right: 15px;
+  border: 1px solid #d0d0d0;
+  background: #fff;
+  display: inline-block;
+  line-height: 0;
+}
+.profile .info .stats .gravatar img, .repository .info .stats .gravatar img {
+  height: 48px;
+  width: 48px;
+}
+.profile .info .stats > ul, .repository .info .stats > ul {
+  padding: 1px 0 0;
+  margin: 10px 0 0;
+  list-style: none;
+  float: left;
+}
+.profile .info .stats > ul > li, .repository .info .stats > ul > li {
+  float: left;
+  margin-right: 15px;
+  color: #666;
+  font-size: 12px;
+  line-height: 18px;
+}
+.profile .info .stats > ul > li strong, .repository .info .stats > ul > li strong {
+  color: #000;
+  display: block;
+  font-size: 26px;
+}
+.profile .info .tabs, .repository .info .tabs {
+  border-bottom: 1px solid #ddd;
+  padding: 0;
+  margin: 0;
+}
+.profile .info .tabs li, .repository .info .tabs li {
+  display: inline-block;
+  cursor: pointer;
+}
+.profile .info .tabs a, .repository .info .tabs a {
+  color: #666;
+  padding: 8px 12px;
+  display: inline-block;
+  margin-bottom: -1px;
+}
+.profile .info .tabs a.active, .repository .info .tabs a.active {
+  color: #333;
+  font-weight: bold;
+  border-left: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  -webkit-border-radius: 3px 3px 0 0;
+  background: #fff;
+}
+.profile .about, .repository .about {
+  display: none;
+  margin-bottom: 10px;
+}
+.profile .tab-sections > *, .repository .tab-sections > * {
+  display: none;
+}
+.profile .repos, .repository .repos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.profile .repos > li, .repository .repos > li {
+  line-height: 20px;
+  border-bottom: 1px solid #d5d5d5;
+  -webkit-border-radius: 4px;
+  background: #ffffff url(/img/public.png) no-repeat 8px center;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 10px 10px 31px;
+}
+.profile .repos > li.fork, .repository .repos > li.fork {
+  background-image: url(/img/public-fork.png);
+}
+.profile .repos > li.private, .repository .repos > li.private {
+  background-image: url(/img/private.png);
+}
+.profile .repos > li.private.fork, .repository .repos > li.private.fork {
+  background-image: url(/img/private-fork.png);
+}
+.profile .repos > li > h3, .repository .repos > li > h3 {
+  float: left;
+  margin: 0;
+  width: 40%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #4183c4;
+}
+.profile .repos > li > .repo-stats, .repository .repos > li > .repo-stats {
+  float: right;
+  font-size: 11px;
+  color: #666;
+  padding: 0;
+  width: 60%;
+}
+.profile .repos > li > .repo-stats > li, .repository .repos > li > .repo-stats > li {
+  float: right;
+  list-style: none;
+  margin: 0;
+  padding-left: 20px;
+}
+.profile .repos > li > .repo-stats > li.watchers,
+.repository .repos > li > .repo-stats > li.watchers,
+.profile .repos > li > .repo-stats > li.forks,
+.repository .repos > li > .repo-stats > li.forks {
+  padding-left: 18px;
+}
+.profile .repos > li > .repo-stats > li.watchers, .repository .repos > li > .repo-stats > li.watchers {
+  background: url(/img/repostat_watchers.png) no-repeat 0 -2px;
+  margin-left: 5px;
+}
+.profile .repos > li > .repo-stats > li.forks, .repository .repos > li > .repo-stats > li.forks {
+  background: url(/img/repostat_forks.png) no-repeat 0 -2px;
+  margin-left: 2px;
+}
+.profile .readme, .repository .readme {
+  padding: 10px 15px;
+}
+.profile .readme .name, .repository .readme .name {
+  display: none;
+}
+.profile .readme > div :first-child, .repository .readme > div :first-child {
+  margin-top: 0;
+}
+.profile .readme > div h1, .repository .readme > div h1 {
+  font-size: 20px;
+  margin: 10px 0;
+}
+.profile .readme > div h2, .repository .readme > div h2 {
+  font-size: 18px;
+  margin: 8px 0;
+}
+.profile .readme > div h3, .repository .readme > div h3 {
+  font-size: 16px;
+  margin: 6px 0;
+}
+.profile .readme > div h4, .repository .readme > div h4 {
+  font-size: 14px;
+  margin: 5px 0;
+}
+.profile .readme > div p, .repository .readme > div p {
+  font-size: 14px;
+  margin: 2px 0;
+}
+.profile .readme > div pre, .repository .readme > div pre {
+  padding: 5px;
+  margin: 5px 0;
+  overflow: scroll;
+}
+.profile .readme > div ol,
+.repository .readme > div ol,
+.profile .readme > div ul,
+.repository .readme > div ul {
+  list-style-position: inside;
+  padding-left: 10px;
+  margin: 5px 0;
+}
