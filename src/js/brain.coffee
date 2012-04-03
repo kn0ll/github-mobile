@@ -36,9 +36,46 @@ $ ->
 	Backbone.history.start()
 
 	# b2g install
+	# crap code to make a confirm message because b2g cannot lolol
+	# if confirm 'Wow! You\'re totally on B2G!! Install this one your home screen?'
+	# E/GeckoConsole(87): [JavaScript Error: "Couldn't play common dialog event sound:
+	# TypeError: Cc['@mozilla.org/sound;1'] is undefined"
+	# {file: "resource://gre/modules/CommonDialog.jsm" line: 213}]
 	if navigator.mozApps
-		if confirm 'Wow! You\'re totally on B2G!! Install this one your home screen?'
+		# style
+		bcss = 
+			'padding': '10px 20px'
+			'background': '#666'
+			'border-radius': '4px'
+			'color': '#fff'
+			'margin-right': '15px'
+		$nob = $('<a class="no" href="#">No</a>').css bcss
+		$yesb = $('<a class="yes" href="#">Yes</a>').css bcss
+		$confirm = $('<div id="confirm" />').css
+			'border-radius': '4px'
+			'box-sizing': 'border-box'
+			'position': 'absolute'
+			'width': '100%'
+			'background': '#bbb'
+			'padding': '15px 15px 20px'
+			'margin': '10px'
+		$p = $('<p>Wow! You\'re totally on B2G!! Install this one your home screen?</p>').css
+			'margin': '0 0 20px'
+		# build
+		close = ->
+			$confirm.remove()
+		install = ->
 			navigator.mozApps.install 'http://gh.nodejitsu.com/manifest.json'
+		$confirm.append $p
+		$confirm.append $nob
+		$confirm.append $yesb
+		# bind
+		$('body').append $confirm
+		$('a.yes', $confirm).click ->
+			close()
+			install()
+		$('a.no', $confirm).click ->
+			close()
 
 	# all anchors are routes
 	$ ->
